@@ -24,16 +24,7 @@
 
 Create a Full Stack Web Application with the following features:
 
-- [x] Use a Node and Express web server  
-- [x] Use React
-- [x] Use Redux  
-- [x] Use Mongoose with MongoDb
-- [x] Routes for retrieving and adding new data
-- [x] Polished front end/UI
-- [x] Meet good-quality coding standards (indentation, scoping, naming, etc.)
-- [x] Folder structure that meets the MVC paradigm
-- [x] Incorporate encryption for passwords (BCrypt)
-- [x] Incorporate user authentication (JWT)
+- [x] Add here
 
 <!-- - [x] Use a Node and Express web server
 - [x] Backed by a MySQL database with a Sequelize ORM
@@ -63,13 +54,13 @@ To install the project follow these steps:
    - npm install
 
 3. Run the app with:
-   - node server.js
+   - npx expo start
 
 ## Usage
 
 **User Story**
 
-As the user I want to ... track my climbing progress with a web app. This should allow me to create, read, upload and delete climbing sessions, training sessions, projects and sends.
+As the user I want to ... track my climbing progress with a mobile app. This should allow me to create, read, upload and delete climbing sessions, training sessions, projects and sends.
 
 **Screenshots of Application:**  
 
