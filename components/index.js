@@ -1,4 +1,4 @@
-import VideoCard from "./SendCard";
+import SendCard from "./SendCard";
 import FormField from "./FormField";
 import CustomButton from "./CustomButton";
 import InfoBox from "./InfoBox";
@@ -8,7 +8,7 @@ import SearchInput from "./SearchInput";
 import EmptyState from "./EmptyState";
 
 export {
-  VideoCard,
+  SendCard,
   FormField,
   CustomButton,
   InfoBox,

@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
 import { icons } from "../../constants";
 import { createVideoPost } from "../../lib/appwrite";
@@ -21,10 +22,12 @@ const Create = () => {
   const { user } = useGlobalContext();
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
-    title: "",
+    grade: "",
     video: null,
     thumbnail: null,
-    prompt: "",
+    attempts: "",
+    climber: "",
+    notes: "",
   });
 
   const openPicker = async (selectType) => {
@@ -58,10 +61,8 @@ const Create = () => {
 
   const submit = async () => {
     if (
-      (form.prompt === "") |
-      (form.title === "") |
-      !form.thumbnail |
-      !form.video
+      (form.grade === "") |
+      (form.attempts === "")
     ) {
       return Alert.alert("Please provide all fields");
     }
@@ -79,10 +80,12 @@ const Create = () => {
       Alert.alert("Error", error.message);
     } finally {
       setForm({
-        title: "",
+        grade: "",
         video: null,
         thumbnail: null,
-        prompt: "",
+        attempts: "",
+        climber: "",
+        notes: "",
       });
 
       setUploading(false);
@@ -92,16 +95,91 @@ const Create = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView className="px-4 my-6">
-        <Text className="text-2xl text-white font-psemibold">Upload Video</Text>
+        <Text className="text-2xl text-white font-psemibold">Log a send</Text>
+        <Text
+          style={{
+            fontSize: 16,
+            color: "#CDCDE0",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "Poppins-Medium",
+            marginTop: 30,
+          }}>
+          Select bouldering or top roping grade
+        </Text>
+        <Picker
+          style={{
+            fontSize: 14,
+            color: "#CDCDE0",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "Poppins-Medium",
+          }}
+          selectedValue={form.grade}
+          onValueChange={(value) => setForm({ ...form, grade: value })}
+        >
+          <Picker.Item label="V0" value="V0" />
+          <Picker.Item label="V1" value="V1" />
+          <Picker.Item label="V2" value="V2" />
+          <Picker.Item label="V3" value="V3" />
+          <Picker.Item label="V4" value="V4" />
+          <Picker.Item label="V5" value="V5" />
+          <Picker.Item label="V6" value="V6" />
+          <Picker.Item label="V7" value="V7" />
+          <Picker.Item label="V8" value="V8" />
+          <Picker.Item label="V9" value="V9" />
+          <Picker.Item label="V10" value="V10" />
+          <Picker.Item label="V11" value="V11" />
+          <Picker.Item label="V12" value="V12" />
+          <Picker.Item label="V13" value="V13" />
+          <Picker.Item label="V14" value="V14" />
+          <Picker.Item label="V15" value="V15" />
+          <Picker.Item label="V16" value="V16" />
+          <Picker.Item label="V17" value="V17" />
+          <Picker.Item label="5.2" value="5.2" />
+          <Picker.Item label="5.3" value="5.3" />
+          <Picker.Item label="5.4" value="5.4" />
+          <Picker.Item label="5.5" value="5.5" />
+          <Picker.Item label="5.6" value="5.6" />
+          <Picker.Item label="5.7" value="5.7" />
+          <Picker.Item label="5.8" value="5.8" />
+          <Picker.Item label="5.9" value="5.9" />
+          <Picker.Item label="5.10a" value="5.10a" />
+          <Picker.Item label="5.10b" value="5.10b" />
+          <Picker.Item label="5.10c" value="5.10c" />
+          <Picker.Item label="5.10d" value="5.10d" />
+          <Picker.Item label="5.11a" value="5.11a" />
+          <Picker.Item label="5.11b" value="5.11b" />
+          <Picker.Item label="5.11c" value="5.11c" />
+          <Picker.Item label="5.11d" value="5.11d" />
+          <Picker.Item label="5.12a" value="5.12a" />
+          <Picker.Item label="5.12b" value="5.12b" />
+          <Picker.Item label="5.12c" value="5.12c" />
+          <Picker.Item label="5.12d" value="5.12d" />
+          <Picker.Item label="5.13a" value="5.13a" />
+          <Picker.Item label="5.13b" value="5.13b" />
+          <Picker.Item label="5.13c" value="5.13c" />
+          <Picker.Item label="5.13d" value="5.13d" />
+          <Picker.Item label="5.14a" value="5.14a" />
+          <Picker.Item label="5.14b" value="5.14b" />
+          <Picker.Item label="5.14c" value="5.14c" />
+          <Picker.Item label="5.14d" value="5.14d" />
+        </Picker>
 
         <FormField
-          title="Video Title"
-          value={form.title}
-          placeholder="Give your video a catchy title..."
-          handleChangeText={(e) => setForm({ ...form, title: e })}
-          otherStyles="mt-10"
+          title="Attempts"
+          value={form.attempts}
+          handleChangeText={(e) => setForm({ ...form, attempts: e })}
+          otherStyles="mt-7"
         />
 
+        <FormField
+          title="Notes"
+          value={form.notes}
+          handleChangeText={(e) => setForm({ ...form, notes: e })}
+          otherStyles="mt-7"
+        />
+        {/* <Text className="text-2xl text-white font-psemibold">Upload Video</Text> */}
         <View className="mt-7 space-y-2">
           <Text className="text-base text-gray-100 font-pmedium">
             Upload Video
@@ -158,14 +236,6 @@ const Create = () => {
             )}
           </TouchableOpacity>
         </View>
-
-        <FormField
-          title="AI Prompt"
-          value={form.prompt}
-          placeholder="The AI prompt of your video...."
-          handleChangeText={(e) => setForm({ ...form, prompt: e })}
-          otherStyles="mt-7"
-        />
 
         <CustomButton
           title="Submit & Publish"

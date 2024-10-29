@@ -21,7 +21,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.jsm.tcw"
+      "package": "com.tcw.the-climbing-wall"
     },
     "web": {
       "favicon": "./assets/favicon.png"

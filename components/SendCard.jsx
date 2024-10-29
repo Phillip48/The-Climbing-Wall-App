@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 
 import { icons } from "../constants";
 
-const SendCard = ({ title, creator, avatar, thumbnail, video }) => {
+const SendCard = ({ grade, attempts, climber, avatar, thumbnail, video }) => {
   const [play, setPlay] = useState(false);
 
   return (
@@ -24,13 +24,19 @@ const SendCard = ({ title, creator, avatar, thumbnail, video }) => {
               className="font-psemibold text-sm text-white"
               numberOfLines={1}
             >
-              {title}
+              {grade}
+            </Text>
+            <Text
+              className="font-psemibold text-sm text-white"
+              numberOfLines={1}
+            >
+              {attempts}
             </Text>
             <Text
               className="text-xs text-gray-100 font-pregular"
               numberOfLines={1}
             >
-              {creator}
+              {climber}
             </Text>
           </View>
         </View>

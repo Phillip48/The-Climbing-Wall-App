@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import useAppwrite from "../../lib/useAppwrite";
 import { searchPosts } from "../../lib/appwrite";
-import { EmptyState, SearchInput, VideoCard } from "../../components";
+import { EmptyState, SearchInput, SendCard } from "../../components";
 
 const Search = () => {
   const { query } = useLocalSearchParams();
@@ -21,12 +21,12 @@ const Search = () => {
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <VideoCard
-            title={item.title}
+          <SendCard
+            grade={item.grade}
             thumbnail={item.thumbnail}
             video={item.video}
-            creator={item.creator.username}
-            avatar={item.creator.avatar}
+            climber={item.climber.username}
+            avatar={item.climber.avatar}
           />
         )}
         ListHeaderComponent={() => (
@@ -47,8 +47,8 @@ const Search = () => {
         )}
         ListEmptyComponent={() => (
           <EmptyState
-            title="No Videos Found"
-            subtitle="No videos found for this search query"
+            title="No Sends Found"
+            subtitle="No sends found for this search query"
           />
         )}
       />

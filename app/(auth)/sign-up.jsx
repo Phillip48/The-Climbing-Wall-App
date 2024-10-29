@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
+import { View, Text, ScrollView, StyleSheet, Dimensions, Alert, Image, TextInput } from "react-native";
 
 import { images } from "../../constants";
 import { createUser } from "../../lib/appwrite";
 import { CustomButton, FormField } from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { Picker } from "@react-native-picker/picker";
+import { Picker } from '@react-native-picker/picker';
 
 const SignUp = () => {
   const { setUser, setIsLogged } = useGlobalContext();
@@ -89,18 +89,42 @@ const SignUp = () => {
             otherStyles="mt-7"
           />
 
-          <FormField
+          {/* <FormField
             title="Max Bouldering Grade"
             value={form.maxBoulderingGrade}
             handleChangeText={(e) =>
               setForm({ ...form, maxBoulderingGrade: e })
             }
             otherStyles="mt-7"
-          />
-          <p>Max Bouldering Grade</p>
-          <Picker
-            value={form.maxBoulderingGrade}
-            onValueChange={(currentCurrency) => setCurrency(currentCurrency)}>
+          /> */}
+          <Text style={{
+            fontSize: 16,
+            color: '#CDCDE0',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: "Poppins-Medium",
+            marginTop: 30
+          }}>
+            Max Bouldering Grade
+          </Text> 
+          {/* <Text style={{
+            fontSize: 18,
+            color: '#CDCDE0',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            Selected: {form.maxBoulderingGrade}
+          </Text>  */}
+          <Picker 
+            style={{
+              fontSize: 14,
+              color: '#CDCDE0',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontFamily: "Poppins-Medium"
+            }}
+            selectedValue={form.maxBoulderingGrade}
+            onValueChange={(value) => setForm({ ...form, maxBoulderingGrade: value })}>
             <Picker.Item label="V0" value="V0" />
             <Picker.Item label="V1" value="V1" />
             <Picker.Item label="V2" value="V2" />
@@ -121,12 +145,64 @@ const SignUp = () => {
             <Picker.Item label="V17" value="V17" />
           </Picker>
 
-          <FormField
+          <Text style={{
+            fontSize: 16,
+            color: '#CDCDE0',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: "Poppins-Medium",
+            marginTop: 30
+          }}>
+            Max Top Roping Grade
+          </Text> 
+
+          <Picker 
+            style={{
+              fontSize: 14,
+              color: '#CDCDE0',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontFamily: "Poppins-Medium"
+            }}
+            selectedValue={form.maxBoulderingGrade}
+            onValueChange={(value) => setForm({ ...form, maxBoulderingGrade: value })}>
+            <Picker.Item label="5.2" value="5.2" />
+            <Picker.Item label="5.3" value="5.3" />
+            <Picker.Item label="5.4" value="5.4" />
+            <Picker.Item label="5.5" value="5.5" />
+            <Picker.Item label="5.6" value="5.6" />
+            <Picker.Item label="5.7" value="5.7" />
+            <Picker.Item label="5.8" value="5.8" />
+            <Picker.Item label="5.9" value="5.9" />
+            <Picker.Item label="5.10a" value="5.10a" />
+            <Picker.Item label="5.10b" value="5.10b" />
+            <Picker.Item label="5.10c" value="5.10c" />
+            <Picker.Item label="5.10d" value="5.10d" />
+            <Picker.Item label="5.11a" value="5.11a" />
+            <Picker.Item label="5.11b" value="5.11b" />
+            <Picker.Item label="5.11c" value="5.11c" />
+            <Picker.Item label="5.11d" value="5.11d" />
+            <Picker.Item label="5.12a" value="5.12a" />
+            <Picker.Item label="5.12b" value="5.12b" />
+            <Picker.Item label="5.12c" value="5.12c" />
+            <Picker.Item label="5.12d" value="5.12d" />
+            <Picker.Item label="5.13a" value="5.13a" />
+            <Picker.Item label="5.13b" value="5.13b" />
+            <Picker.Item label="5.13c" value="5.13c" />
+            <Picker.Item label="5.13d" value="5.13d" />
+            <Picker.Item label="5.14a" value="5.14a" />
+            <Picker.Item label="5.14b" value="5.14b" />
+            <Picker.Item label="5.14c" value="5.14c" />
+            <Picker.Item label="5.14d" value="5.14d" />
+            
+          </Picker>
+
+          {/* <FormField
             title="Max Top-Roping Grade"
             value={form.maxTopRopingGrade}
             handleChangeText={(e) => setForm({ ...form, maxTopRopingGrade: e })}
             otherStyles="mt-7"
-          />
+          /> */}
 
           <FormField
             title="Bio"
@@ -158,5 +234,38 @@ const SignUp = () => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#356859',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  formLabel: {
+    fontSize: 20,
+    color: '#fff',
+  },
+  inputStyle: {
+    marginTop: 20,
+    width: 300,
+    height: 40,
+    paddingHorizontal: 10,
+    borderRadius: 50,
+    backgroundColor: '#b9e4c9',
+  },
+  formText: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#fff',
+    fontSize: 20,
+  },
+  text: {
+    color: '#fff',
+    fontSize: 20,
+  },
+});
+
 
 export default SignUp;
