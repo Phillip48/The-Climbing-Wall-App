@@ -1,50 +1,84 @@
-# Welcome to your Expo app 👋
+# The-Climbing-Wall - Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-v1.0.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/Rini0404/LeCookBook" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/kefranabg/readme-md-generator/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+</p>
 
-## Get started
+## Table of contents
 
-1. Install dependencies
+- [Climbing-gym-progress-tracker](#climbing-gym-progress-tracker)
+  - [Table of contents](#table-of-contents)
+  - [The Project](#the-project)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Questions](#questions)
+  - [Collaborators](#collaborators)
 
-   ```bash
-   npm install
-   ```
+## The Project
 
-2. Start the app
+Create a Full Stack Web Application with the following features:
 
-   ```bash
-    npx expo start
-   ```
+- [x] Use a Node and Express web server  
+- [x] Use React
+- [x] Use Redux  
+- [x] Use Mongoose with MongoDb
+- [x] Routes for retrieving and adding new data
+- [x] Polished front end/UI
+- [x] Meet good-quality coding standards (indentation, scoping, naming, etc.)
+- [x] Folder structure that meets the MVC paradigm
+- [x] Incorporate encryption for passwords (BCrypt)
+- [x] Incorporate user authentication (JWT)
 
-In the output, you'll find options to open the app in a
+<!-- - [x] Use a Node and Express web server
+- [x] Backed by a MySQL database with a Sequelize ORM
+- [x] Use an existing public dataset to power the database (OMDB)
+- [x] Migration strategy using seeds and schema files
+- [x] Routes for retrieving and adding new data
+- [x] Incorporate authentication (BCrypt)
+- [x] Folder structure that meets the MVC paradigm
+- [x] Use Handlebars for server-side templating
+- [x] Protected API keys in Node with environment variables
+- [x] Polished front end/UI
+- [x] Meet good-quality coding standards (indentation, scoping, naming, etc.)
+- [x] Deployed using Heroku (with data) -->
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Installation
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+You can access the deployed application with the Heroku link: (Not uplodaded yet)
 
-## Get a fresh project
+To install the project follow these steps:
 
-When you're ready, run:
+1. Clone the application from GitHub with:
 
-```bash
-npm run reset-project
-```
+   - git clone [clone link from GitHub]
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. From the root folder, install the dependencies with:
 
-## Learn more
+   - npm install
 
-To learn more about developing your project with Expo, look at the following resources:
+3. Run the app with:
+   - node server.js
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Usage
 
-## Join the community
+**User Story**
 
-Join our community of developers creating universal apps.
+As the user I want to ... track my climbing progress with a web app. This should allow me to create, read, upload and delete climbing sessions, training sessions, projects and sends.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+**Screenshots of Application:**  
+
+<!-- ![image]()   -->
+
+## Questions  
+
+If you have questions or you want to share comments, we will be glad to hear from you.
+
+## Collaborators  
+
+- Phillip Pereira - https://github.com/Phillip48
