@@ -29,9 +29,11 @@ import {
   EmptyState,
   SendCard,
 } from "../../components";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Projects = () => {
+  const { user } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const { data: posts, refetch } = useAppwrite(getUsersProjects);
@@ -44,11 +46,12 @@ const Projects = () => {
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
     grade: "",
+    sessions: "",
     video: null,
     thumbnail: null,
     attempts: "",
     notes: "",
-    date: "10/04/2024",
+    date: "",
   });
 
   const openPicker = async (selectType) => {
@@ -80,36 +83,63 @@ const Projects = () => {
     }
   };
 
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    setShow(false);
+    setDate(selectedDate);
+    setForm({ ...form, date: selectedDate });
+  };
+
+  const showMode = (modeToShow) => {
+    setShow(true);
+    setMode(modeToShow);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
+
+  const showTimepicker = () => {
+    showMode("time");
+  };
+
   const submit = async () => {
-    if (form.attempts === "" || form.grade === "" || form.password === "") {
+    if (form.attempts === "" || form.grade === "") {
       Alert.alert("Error", "Please fill in all fields");
     }
-    // Check if attemnpts is a number
-    function isNumber(value) {
-      return typeof value == "number";
-    }
-    if (isNumber(form.attempts) == false) {
-      Alert.alert("Error", "Please input a number");
-    }
+    // // Check if attemnpts is a number
+    // function isNumber(value) {
+    //   return typeof value == "number";
+    // }
+    // if (isNumber(form.attempts) == false) {
+    //   Alert.alert("Error", "Please input a number");
+    // }
 
-    setSubmitting(true);
+    setUploading(true);
     try {
-      const result = await createProjectPost(
-        form.grade,
-        form.attempts,
-        form.user,
-        form.notes,
-        form.climbSent,
-        form.maxTopRopingGrade
-      );
-      setUser(result);
-      setIsLogged(true);
-
-      router.replace("/home");
+      await createProjectPost({
+        ...form,
+        userId: user.$id,
+      });
+      Alert.alert("Success", "Post uploaded successfully");
+      router.push("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
-      setSubmitting(false);
+      setForm({
+        grade: "",
+        sessions: "",
+        video: null,
+        thumbnail: null,
+        attempts: "",
+        notes: "",
+        date: "",
+      });
+
+      setUploading(false);
     }
   };
   return (
@@ -284,12 +314,32 @@ const Projects = () => {
                 className="font-psemibold"
                 style={{
                   fontSize: 16,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "Poppins-Medium",
+                  marginBottom: -10,
+                  marginTop: 30,
+                }}
+              >
+                Number of sessions
+              </Text>
+              <FormField
+                title=""
+                style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
+                value={form.sessions}
+                handleChangeText={(e) => setForm({ ...form, sessions: e })}
+                otherStyles=""
+              />
+              <Text
+                className="font-psemibold"
+                style={{
+                  fontSize: 16,
 
                   alignItems: "center",
                   justifyContent: "center",
                   fontFamily: "Poppins-Medium",
-                  marginBottom: -20,
-                  marginTop: 20,
+                  marginBottom: -30,
+                  marginTop: 10,
                 }}
               >
                 Attempts
@@ -301,6 +351,68 @@ const Projects = () => {
                 handleChangeText={(e) => setForm({ ...form, attempts: e })}
                 otherStyles=""
               />
+              {/* <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginTop: 10,
+                }}
+              >
+                <TouchableOpacity
+                  onPress={showDatepicker}
+                  activeOpacity={0.7}
+                  style={{
+                    marginTop: 0,
+                    marginLeft: 0,
+                    marginRight: 0,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                  }}
+                  className={` bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
+                >
+                  <Text className={`text-primary font-psemibold text-lg`}>
+                    Select Date
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={showTimepicker}
+                  activeOpacity={0.7}
+                  style={{
+                    marginTop: 0,
+                    marginLeft: 0,
+                    marginRight: 0,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                  }}
+                  className={` bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
+                >
+                  <Text className={`text-primary font-psemibold text-lg`}>
+                    Select Time
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: "black",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "Poppins-Medium",
+                  marginTop: 10,
+                }}
+              >
+                Selected: {date.toLocaleString()}
+              </Text>
+              {show && (
+                <DateTimePicker
+                  value={date}
+                  mode={mode}
+                  is24Hour={true}
+                  onChange={onChange}
+                />
+              )} */}
               <Text
                 // className="font-psemibold"
                 style={{
@@ -308,8 +420,8 @@ const Projects = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   fontFamily: "Poppins-Medium",
-                  marginBottom: -20,
-                  marginTop: 20,
+                  marginBottom: -30,
+                  marginTop: 10,
                 }}
               >
                 Notes

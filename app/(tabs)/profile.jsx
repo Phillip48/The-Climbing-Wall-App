@@ -12,7 +12,7 @@ const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
   const { data: posts } = useAppwrite(() => getUserSends(user.$id));
 
-  // console.log(posts)
+  // console.log(user)
 
   const totalAttempts = () => {
     let attemptTotal = 0;
@@ -98,7 +98,22 @@ const Profile = () => {
                 title={totalAttempts() || 0}
                 subtitle="Atempts"
                 titleStyles="text-xl"
+                containerStyles="mr-10"
               />
+               <InfoBox
+                title={user.maxTopRopingGrade || "N/A"}
+                subtitle={"Max Top\n Roping"}
+                titleStyles="text-xl"
+                containerStyles="mr-10"
+              />
+              <InfoBox
+                title={user.maxBoulderingGrade}
+                subtitle={`Max\n Bouldering `}
+                titleStyles="text-xl"
+              />
+            </View>
+            <View className="mt-5 flex flex-row">
+             
             </View>
           </View>
         )}

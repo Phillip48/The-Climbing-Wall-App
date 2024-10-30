@@ -7,12 +7,13 @@ import {
   View,
   Text,
   Alert,
+  Button,
   Image,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-// import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { icons } from "../../constants";
 import { createSendPost } from "../../lib/appwrite";
@@ -22,33 +23,43 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 const Create = () => {
   const { user } = useGlobalContext();
   const [uploading, setUploading] = useState(false);
-  const [dateState, setDate] = useState();
   const [form, setForm] = useState({
     grade: "",
     video: null,
     thumbnail: null,
-    attempts: "",
+    attempts: 1,
     notes: "",
-    date: dateState,
+    date: "",
   });
+  // Get date and set it in the state.
+  // let date = new Date();
+  // let day = date.getDate();
+  // let month = date.getMonth();
+  // let year = date.getFullYear();
+  // let dateString = month + "/" + day + "/" + year;
 
-  // const [date, setDate] = useState(new Date(1598051730000));
-  // const [show, setShow] = useState(false);
-  // const [mode, setMode] = useState("date");
-  // const dateOnChange = (event, selectedDate) => {
-  //   const currentDate = selectedDate;
-  //   setShow(false);
-  //   setDate(currentDate);
-  //   setForm(form.date);
-  //   console.log(form);
-  // };
-  // const showMode = (currentMode) => {
-  //   setShow(true);
-  //   setMode(currentMode);
-  // };
-  // const showDatepicker = () => {
-  //   showMode("date");
-  // };
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    setShow(false);
+    setDate(selectedDate);
+    setForm({ ...form, date: selectedDate });
+  };
+
+  const showMode = (modeToShow) => {
+    setShow(true);
+    setMode(modeToShow);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
 
   const openPicker = async (selectType) => {
     const result = await DocumentPicker.getDocumentAsync({
@@ -80,16 +91,16 @@ const Create = () => {
   };
 
   const submit = async () => {
-    if ((form.grade === "") | (form.attempts === "")) {
+    if (form.grade === "" || form.attempts === "") {
       return Alert.alert("Please provide all fields");
     }
-    // Get date and set it in the state. 
-    let date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth();
-    let year = date.getFullYear();
-    let dateString = month + "/" + day + "/" + year;
-    setDate(dateString);
+    // Check if attemnpts is a number
+    // function isNumber(value) {
+    //   return typeof value == "number";
+    // }
+    // if (isNumber(form.attempts) == false) {
+    //   Alert.alert("Error", "Please input a number");
+    // }
 
     setUploading(true);
     try {
@@ -97,7 +108,6 @@ const Create = () => {
         ...form,
         userId: user.$id,
       });
-
       Alert.alert("Success", "Post uploaded successfully");
       router.push("/home");
     } catch (error) {
@@ -109,7 +119,7 @@ const Create = () => {
         thumbnail: null,
         attempts: "",
         notes: "",
-        date: dateState,
+        date: "",
       });
 
       setUploading(false);
@@ -197,13 +207,37 @@ const Create = () => {
           handleChangeText={(e) => setForm({ ...form, attempts: e })}
           otherStyles="mt-7"
         />
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-around",
+            alignItems: "center",
+            marginTop: 20
+          }}
+        >
+          <TouchableOpacity
+            onPress={showDatepicker}
+            activeOpacity={0.7}
+            style={{ marginTop: 0, marginLeft: 0, marginRight: 0, paddingLeft: 10, paddingRight: 10 }}
+            className={` bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
+          >
+            <Text className={`text-primary font-psemibold text-lg`}>
+              Select Date
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={showTimepicker}
+            activeOpacity={0.7}
+            style={{ marginTop: 0, marginLeft: 0, marginRight: 0, paddingLeft: 10, paddingRight: 10 }}
+            className={` bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
+          >
+            <Text className={`text-primary font-psemibold text-lg`}>
+            Select Time
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-        {/* <CustomButton
-          title="Select Date"
-          handlePress={showDatepicker}
-          containerStyles="mt-7"
-          // isLoading={uploading}
-        />
         <Text
           style={{
             fontSize: 16,
@@ -214,17 +248,16 @@ const Create = () => {
             marginTop: 10,
           }}
         >
-          Date Selected: {date.toLocaleString()}
+          Selected: {date.toLocaleString()}
         </Text>
         {show && (
           <DateTimePicker
-            testID="dateTimePicker"
-            value={form.date}
+            value={date}
             mode={mode}
-            // is24Hour={true}
-            onChange={dateOnChange}
+            is24Hour={true}
+            onChange={onChange}
           />
-        )} */}
+        )}
         <FormField
           title="Notes"
           value={form.notes}
