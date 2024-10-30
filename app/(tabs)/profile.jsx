@@ -12,6 +12,24 @@ const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
   const { data: posts } = useAppwrite(() => getUserSends(user.$id));
 
+  // console.log(posts)
+
+  const totalAttempts = () => {
+    let attemptTotal = 0;
+    let funtioncount = 0;
+    posts.forEach((send) => {
+      if(funtioncount == posts.length) {
+        // console.log('total', attemptTotal)
+        return attemptTotal;
+      }
+      let functionAttempt = send.attempts;
+      attemptTotal = +attemptTotal + +functionAttempt
+      // console.log(attemptTotal);
+      funtioncount++;
+    })
+    return attemptTotal;
+  }
+
   const logout = async () => {
     await signOut();
     setUser(null);
@@ -77,7 +95,7 @@ const Profile = () => {
                 containerStyles="mr-10"
               />
               <InfoBox
-                title={posts.length || 0}
+                title={totalAttempts() || 0}
                 subtitle="Atempts"
                 titleStyles="text-xl"
               />

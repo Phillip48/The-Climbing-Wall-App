@@ -1,4 +1,4 @@
-# The-Climbing-Wall - Mobile App
+# The-Climbing-Wall-Mobile App
 
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-v1.0.0-blue.svg?cacheSeconds=2592000" />
@@ -12,7 +12,7 @@
 
 ## Table of contents
 
-- [Climbing-gym-progress-tracker](#climbing-gym-progress-tracker)
+- [The-Climbing-Wall-Mobile App](#the-climbing-wall-mobile-app)
   - [Table of contents](#table-of-contents)
   - [The Project](#the-project)
   - [Installation](#installation)
