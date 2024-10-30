@@ -4,12 +4,15 @@ import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 
 import { images } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
-import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
-import { EmptyState, SearchInput, Trending, VideoCard } from "../../components";
+import { getAllSends, getLatestSends } from "../../lib/appwrite";
+import { EmptyState, SearchInput, Trending, SendCard } from "../../components";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
-  const { data: posts, refetch } = useAppwrite(getAllPosts);
-  const { data: latestPosts } = useAppwrite(getLatestPosts);
+  const { user, setUser, setIsLogged } = useGlobalContext();
+
+  const { data: posts, refetch } = useAppwrite(getAllSends);
+  const { data: latestPosts } = useAppwrite(getLatestSends);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -31,12 +34,18 @@ const Home = () => {
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <VideoCard
+          <SendCard
             title={item.title}
+            // Added user below and the require import 
+            // to display the thumbnail on sendcard comp.
+            user={user}
+            grade={item.grade}
+            attempts={item.attempts}
             thumbnail={item.thumbnail}
             video={item.video}
-            creator={item.creator.username}
-            avatar={item.creator.avatar}
+            notes={item.notes}
+            climber={item.users.username}
+            avatar={item.users.avatar}
           />
         )}
         ListHeaderComponent={() => (

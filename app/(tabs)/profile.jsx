@@ -4,13 +4,13 @@ import { View, Image, FlatList, TouchableOpacity } from "react-native";
 
 import { icons } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
-import { getUserPosts, signOut } from "../../lib/appwrite";
+import { getUserSends, signOut } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { EmptyState, InfoBox, SendCard } from "../../components";
 
 const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
-  const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
+  const { data: posts } = useAppwrite(() => getUserSends(user.$id));
 
   const logout = async () => {
     await signOut();
@@ -27,11 +27,13 @@ const Profile = () => {
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <SendCard
-            title={item.title}
-            // thumbnail={item.thumbnail}
-            // video={item.video}
-            // creator={item.creator.username}
-            // avatar={item.creator.avatar}
+            grade={item.grade}
+            thumbnail={item.thumbnail}
+            attempts={item.attempts}
+            climber={item.users.username}
+            notes={item.notes}
+            user={user}
+            // avatar={item.climber.avatar}
           />
         )}
         ListEmptyComponent={() => (

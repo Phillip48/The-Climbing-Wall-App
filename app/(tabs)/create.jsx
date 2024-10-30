@@ -12,23 +12,43 @@ import {
   ScrollView,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+// import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { icons } from "../../constants";
-import { createVideoPost } from "../../lib/appwrite";
+import { createSendPost } from "../../lib/appwrite";
 import { CustomButton, FormField } from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Create = () => {
   const { user } = useGlobalContext();
   const [uploading, setUploading] = useState(false);
+  const [dateState, setDate] = useState();
   const [form, setForm] = useState({
     grade: "",
     video: null,
     thumbnail: null,
     attempts: "",
-    climber: "",
     notes: "",
+    date: dateState,
   });
+
+  // const [date, setDate] = useState(new Date(1598051730000));
+  // const [show, setShow] = useState(false);
+  // const [mode, setMode] = useState("date");
+  // const dateOnChange = (event, selectedDate) => {
+  //   const currentDate = selectedDate;
+  //   setShow(false);
+  //   setDate(currentDate);
+  //   setForm(form.date);
+  //   console.log(form);
+  // };
+  // const showMode = (currentMode) => {
+  //   setShow(true);
+  //   setMode(currentMode);
+  // };
+  // const showDatepicker = () => {
+  //   showMode("date");
+  // };
 
   const openPicker = async (selectType) => {
     const result = await DocumentPicker.getDocumentAsync({
@@ -60,16 +80,20 @@ const Create = () => {
   };
 
   const submit = async () => {
-    if (
-      (form.grade === "") |
-      (form.attempts === "")
-    ) {
+    if ((form.grade === "") | (form.attempts === "")) {
       return Alert.alert("Please provide all fields");
     }
+    // Get date and set it in the state. 
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    let dateString = month + "/" + day + "/" + year;
+    setDate(dateString);
 
     setUploading(true);
     try {
-      await createVideoPost({
+      await createSendPost({
         ...form,
         userId: user.$id,
       });
@@ -84,8 +108,8 @@ const Create = () => {
         video: null,
         thumbnail: null,
         attempts: "",
-        climber: "",
         notes: "",
+        date: dateState,
       });
 
       setUploading(false);
@@ -104,7 +128,8 @@ const Create = () => {
             justifyContent: "center",
             fontFamily: "Poppins-Medium",
             marginTop: 30,
-          }}>
+          }}
+        >
           Select bouldering or top roping grade
         </Text>
         <Picker
@@ -173,6 +198,33 @@ const Create = () => {
           otherStyles="mt-7"
         />
 
+        {/* <CustomButton
+          title="Select Date"
+          handlePress={showDatepicker}
+          containerStyles="mt-7"
+          // isLoading={uploading}
+        />
+        <Text
+          style={{
+            fontSize: 16,
+            color: "#CDCDE0",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "Poppins-Medium",
+            marginTop: 10,
+          }}
+        >
+          Date Selected: {date.toLocaleString()}
+        </Text>
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={form.date}
+            mode={mode}
+            // is24Hour={true}
+            onChange={dateOnChange}
+          />
+        )} */}
         <FormField
           title="Notes"
           value={form.notes}
