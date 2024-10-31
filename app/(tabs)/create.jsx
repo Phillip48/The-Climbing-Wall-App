@@ -31,14 +31,6 @@ const Create = () => {
     notes: "",
     date: "",
   });
-  // Get date and set it in the state.
-  // let date = new Date();
-  // let day = date.getDate();
-  // let month = date.getMonth();
-  // let year = date.getFullYear();
-  // let dateString = month + "/" + day + "/" + year;
-
-  
 
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
@@ -106,10 +98,12 @@ const Create = () => {
 
     setUploading(true);
     try {
-      console.log('date before creating', form.date)
+      // console.log('date before creating', form.date)
       await createSendPost({
         ...form,
         userId: user.$id,
+        userMaxBoulderingGrade: user.maxBoulderingGrade,
+        userMaxTopRopingGrade: user.maxTopRopingGrade
       });
       Alert.alert("Success", "Post uploaded successfully");
       router.push("/home");
