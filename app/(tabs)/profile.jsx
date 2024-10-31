@@ -53,6 +53,7 @@ const Profile = () => {
             climber={item.users.username}
             notes={item.notes}
             user={user}
+            itemId={item.$id}
             // avatar={item.climber.avatar}
           />
         )}

@@ -112,6 +112,7 @@ const Home = () => {
             notes={item.notes}
             climber={item.users.username}
             avatar={item.users.avatar}
+            itemId={item.$id}
           />
         )}
         ListHeaderComponent={() => (
