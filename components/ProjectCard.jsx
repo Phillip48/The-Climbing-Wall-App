@@ -20,6 +20,7 @@ import { icons } from "../constants";
 
 const ProjectCard = ({
   user,
+  title,
   grade,
   attempts,
   climber,
@@ -46,6 +47,7 @@ const ProjectCard = ({
   let newAttempts = attempts.toString();
   let newSessions = sessions.toString();
   const [form, setForm] = useState({
+    title: title,
     grade: grade,
     sessions: newSessions,
     video: video,
@@ -191,6 +193,7 @@ const ProjectCard = ({
       Alert.alert("Error", error.message);
     } finally {
       setForm({
+        title: title,
         grade: grade,
         sessions: newSessions,
         video: video,
@@ -224,6 +227,12 @@ const ProjectCard = ({
           </View>
 
           <View className="flex justify-center flex-1 ml-3 gap-y-1">
+            <Text
+              className="font-psemibold text-xs text-white"
+              numberOfLines={1}
+            >
+              {title} 
+            </Text>
             <Text
               className="font-psemibold text-xs text-white"
               numberOfLines={1}
@@ -372,6 +381,28 @@ const ProjectCard = ({
                 <View
                   style={{ flex: 1, flexDirection: "column", width: "100%" }}
                 >
+                  <Text
+                    className="font-psemibold"
+                    style={{
+                      fontSize: 16,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: "Poppins-Medium",
+                      marginBottom: 0,
+                      marginTop: 30,
+                    }}
+                  >
+                    Name Your Project
+                  </Text>
+                  <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
+                    <TextInput
+                      className="flex-1 text-white font-psemibold text-base"
+                      placeholderTextColor="#7B7B8B"
+                      value={form.title}
+                      style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
+                      onChangeText={(e) => setForm({ ...form, title: e })}
+                    />
+                  </View>
                   <Text
                     className="font-psemibold"
                     style={{

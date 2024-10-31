@@ -52,7 +52,7 @@ const Create = () => {
   };
 
   const showTimepicker = () => {
-    showMode('time');
+    showMode("time");
   };
 
   const openPicker = async (selectType) => {
@@ -103,7 +103,7 @@ const Create = () => {
         ...form,
         userId: user.$id,
         userMaxBoulderingGrade: user.maxBoulderingGrade,
-        userMaxTopRopingGrade: user.maxTopRopingGrade
+        userMaxTopRopingGrade: user.maxTopRopingGrade,
       });
       Alert.alert("Success", "Post uploaded successfully");
       router.push("/home");
@@ -127,6 +127,34 @@ const Create = () => {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView className="px-4 my-6">
         <Text className="text-2xl text-white font-psemibold">Log a send</Text>
+        {/* <Text
+          className="font-psemibold"
+          style={{
+            fontSize: 16,
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "Poppins-Medium",
+            marginBottom: 0,
+            marginTop: 30,
+          }}
+        >
+          Name Your Project
+        </Text> */}
+        <FormField
+          title="Name Your Project"
+          value={form.title}
+          handleChangeText={(e) => setForm({ ...form, title: e })}
+          otherStyles="mt-7"
+        />
+        {/* <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
+          <TextInput
+            className="flex-1 text-white font-psemibold text-base"
+            placeholderTextColor="#7B7B8B"
+            value={form.title}
+            style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
+            onChangeText={(e) => setForm({ ...form, title: e })}
+          />
+        </View> */}
         <Text
           style={{
             fontSize: 16,
@@ -210,13 +238,19 @@ const Create = () => {
             flexDirection: "row",
             justifyContent: "space-around",
             alignItems: "center",
-            marginTop: 20
+            marginTop: 20,
           }}
         >
           <TouchableOpacity
             onPress={showDatepicker}
             activeOpacity={0.7}
-            style={{ marginTop: 0, marginLeft: 0, marginRight: 0, paddingLeft: 10, paddingRight: 10 }}
+            style={{
+              marginTop: 0,
+              marginLeft: 0,
+              marginRight: 0,
+              paddingLeft: 10,
+              paddingRight: 10,
+            }}
             className={` bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
           >
             <Text className={`text-primary font-psemibold text-lg`}>
@@ -226,11 +260,17 @@ const Create = () => {
           <TouchableOpacity
             onPress={showTimepicker}
             activeOpacity={0.7}
-            style={{ marginTop: 0, marginLeft: 0, marginRight: 0, paddingLeft: 10, paddingRight: 10 }}
+            style={{
+              marginTop: 0,
+              marginLeft: 0,
+              marginRight: 0,
+              paddingLeft: 10,
+              paddingRight: 10,
+            }}
             className={` bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
           >
             <Text className={`text-primary font-psemibold text-lg`}>
-            Select Time
+              Select Time
             </Text>
           </TouchableOpacity>
         </View>

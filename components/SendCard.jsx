@@ -20,6 +20,7 @@ import { icons } from "../constants";
 
 const SendCard = ({
   user,
+  title,
   grade,
   attempts,
   climber,
@@ -41,6 +42,7 @@ const SendCard = ({
   // Convert to string to display in edit modal
   let newAttempts = attempts.toString();
   const [form, setForm] = useState({
+    title: title,
     grade: grade,
     video: video,
     thumbnail: thumbnail,
@@ -184,6 +186,7 @@ const SendCard = ({
       Alert.alert("Error", error.message);
     } finally {
       setForm({
+        title: title,
         grade: grade,
         video: video,
         thumbnail: thumbnail,
@@ -216,6 +219,12 @@ const SendCard = ({
 
           <View className="flex justify-center flex-1 ml-3 gap-y-1">
             <Text
+              className="font-psemibold text-xs text-white"
+              numberOfLines={1}
+            >
+              {title}
+            </Text>
+            <Text
               className="font-psemibold text-sm text-white"
               numberOfLines={1}
             >
@@ -232,7 +241,7 @@ const SendCard = ({
               className="text-sm text-gray-100 font-pregular"
               numberOfLines={1}
             >
-              Date: {date? date:'No Date Recorded'}
+              Date: {date ? date : "No Date Recorded"}
             </Text>
             <Text
               className="text-sm text-gray-100 font-pregular"
@@ -363,6 +372,28 @@ const SendCard = ({
                 <View
                   style={{ flex: 1, flexDirection: "column", width: "100%" }}
                 >
+                  <Text
+                    className="font-psemibold"
+                    style={{
+                      fontSize: 16,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: "Poppins-Medium",
+                      marginBottom: 0,
+                      marginTop: 30,
+                    }}
+                  >
+                    Name Your Send
+                  </Text>
+                  <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
+                    <TextInput
+                      className="flex-1 text-white font-psemibold text-base"
+                      placeholderTextColor="#7B7B8B"
+                      value={form.title}
+                      style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
+                      onChangeText={(e) => setForm({ ...form, title: e })}
+                    />
+                  </View>
                   <Text
                     className="font-psemibold"
                     style={{
@@ -617,7 +648,7 @@ const SendCard = ({
                     activeOpacity={0.7}
                     className={`bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
                     // disabled={uploading}
-                    style={{marginTop:20}}
+                    style={{ marginTop: 20 }}
                   >
                     <Text className={`text-primary font-psemibold text-lg`}>
                       Submit & Publish
