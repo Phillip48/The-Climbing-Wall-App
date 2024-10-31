@@ -12,8 +12,6 @@ const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
   const { data: posts } = useAppwrite(() => getUserSends(user.$id));
   // const { data: projectPosts } = useAppwrite(() => getUserProjects(user.$id));
-
-
   // console.log(user)
 
   const totalAttempts = () => {
@@ -36,7 +34,6 @@ const Profile = () => {
     await signOut();
     setUser(null);
     setIsLogged(false);
-
     router.replace("/sign-in");
   };
 
@@ -100,19 +97,19 @@ const Profile = () => {
               />
               <InfoBox
                 title={totalAttempts() || 0}
-                subtitle="Atempts"
+                subtitle="Attempts"
                 titleStyles="text-xl"
                 containerStyles="mr-6"
               />
                <InfoBox
-                title={user.maxTopRopingGrade || "N/A"}
+                title={user?.maxTopRopingGrade? user.maxTopRopingGrade : 'N/A'}
                 subtitle={"Max Top\n Roping"}
                 titleStyles="text-xl"
                 containerStyles="mr-6"
               />
               <InfoBox
-                title={user.maxBoulderingGrade}
-                subtitle={`Max\n Bouldering `}
+                title={user?.maxBoulderingGrade? user.maxBoulderingGrade : 'N/A'}
+                subtitle={"Max\n Bouldering "}
                 titleStyles="text-xl"
               />
             </View>

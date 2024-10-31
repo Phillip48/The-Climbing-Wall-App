@@ -37,6 +37,7 @@ const ProjectCard = ({
   const [modalVisible, setModalVisible] = useState(false);
   const [modalEditVisible, setModalEditVisible] = useState(false);
   const [pickerDate, setDate] = useState(new Date());
+  const [climbSentStat, setClimbSentStat] = useState(false);
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [projectUpdate, setProjectUpdate] = useState("");
@@ -175,16 +176,17 @@ const ProjectCard = ({
     if (form.attempts === "" || form.grade === "" || form.sessions === "") {
       Alert.alert("Error", "Please fill in all fields");
     }
-
+    setModalEditVisible(!modalEditVisible);
     setUploading(true);
     try {
       await editProjectPost({
         ...form,
         userId: user.$id,
         itemId: itemId,
+        climbsentstat: climbSentStat
       });
       Alert.alert("Success", "Project updated successfully");
-      router.push("/profile");
+      router.push("/projects");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
@@ -333,7 +335,7 @@ const ProjectCard = ({
         </Modal>
         <Modal
           animationType="slide"
-          swipeToClose={true}
+          swipeToClose={false}
           swipeArea={20} // The height in pixels of the swipeable area, window height by default
           swipeThreshold={50} // The threshold to reach in pixels to close the modal
           transparent={true}
@@ -495,13 +497,6 @@ const ProjectCard = ({
                       onChangeText={(e) => setForm({ ...form, attempts: e })}
                     />
                   </View>
-                  {/* <FormField
-                    title=""
-                    style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
-                    value={form.attempts}
-                    handleChangeText={(e) => setForm({ ...form, attempts: e })}
-                    otherStyles=""
-                  /> */}
                   <Text
                     className="font-psemibold"
                     style={{
@@ -521,7 +516,7 @@ const ProjectCard = ({
                     // onValueChange={setStatus}
                     selectedValue={form.climbsent}
                     onValueChange={(value) =>
-                      setForm({ ...form, climbsent: value })
+                      setForm({ ...form, climbsent: value }, setClimbSentStat(true))
                     }
                   >
                     <Picker.Item label="Sent!" value={true} />
@@ -618,12 +613,6 @@ const ProjectCard = ({
                       onChangeText={(e) => setForm({ ...form, notes: e })}
                     />
                   </View>
-                  {/* <FormField
-                    title=""
-                    value={form.notes}
-                    handleChangeText={(e) => setForm({ ...form, notes: e })}
-                    otherStyles=""
-                  /> */}
                   {/* <Text className="text-2xl text-white font-psemibold">Upload Video</Text> */}
                   <View className="mt-7 space-y-2">
                     <Text className="text-base font-pmedium">Upload Video</Text>
@@ -680,12 +669,6 @@ const ProjectCard = ({
                     </TouchableOpacity>
                   </View>
 
-                  {/* <CustomButton
-                    title="Submit & Publish"
-                    handlePress={submit}
-                    containerStyles="mt-7"
-                    isLoading={uploading}
-                  /> */}
                   <TouchableOpacity
                     onPress={submit}
                     activeOpacity={0.7}
