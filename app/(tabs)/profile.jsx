@@ -4,13 +4,15 @@ import { View, Image, FlatList, TouchableOpacity } from "react-native";
 
 import { icons } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
-import { getUserSends, signOut } from "../../lib/appwrite";
+import { getUserSends, signOut, getUserProjects } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { EmptyState, InfoBox, SendCard } from "../../components";
 
 const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
   const { data: posts } = useAppwrite(() => getUserSends(user.$id));
+  // const { data: projectPosts } = useAppwrite(() => getUserProjects(user.$id));
+
 
   // console.log(user)
 
