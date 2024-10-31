@@ -4,8 +4,10 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 
 import { icons } from "../constants";
 
-const ProjectCard = ({ user, grade, attempts, climber, notes, avatar, thumbnail, video, sessions, climbSent }) => {
+const ProjectCard = ({ user, grade, attempts, climber, notes, avatar, thumbnail, video, sessions, climbsent }) => {
   const [play, setPlay] = useState(false);
+
+  console.log(climbsent)
   // Function to check if there is a video with the send. If there isnt
   // then display text, if there is show video
   const videoUploaded = (video) => {
@@ -83,7 +85,7 @@ const ProjectCard = ({ user, grade, attempts, climber, notes, avatar, thumbnail,
               className="text-sm text-gray-100 font-pregular"
               numberOfLines={1}
             >
-              Climber: {climber}  -  {climbSent? 'Climb Sent!':'Climb Not Sent!'}
+              Climber: {climber}  -  {climbsent? 'Climb Sent!':'Climb Not Sent!'}
             </Text>
             <Text
               className="text-sm text-gray-100 font-pregular"

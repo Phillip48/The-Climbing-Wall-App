@@ -53,7 +53,7 @@ const Projects = () => {
     attempts: "",
     notes: "",
     date: "",
-    climbSent: false,
+    climbsent: false,
   });
 
   const openPicker = async (selectType) => {
@@ -139,7 +139,7 @@ const Projects = () => {
         attempts: "",
         notes: "",
         date: "",
-        climbSent: false,
+        climbsent: false,
       });
 
       setUploading(false);
@@ -162,7 +162,7 @@ const Projects = () => {
             video={item.video}
             notes={item.notes}
             sessions={item.sessions}
-            climbSent={item.climbSent}
+            climbsent={item.climbsent}
             climber={item.users.username}
             avatar={item.users.avatar}
           />
@@ -377,8 +377,8 @@ const Projects = () => {
                   // selectedValue={status}
                   // style={{ height: 50, width: 150 }}
                   // onValueChange={setStatus}
-                  selectedValue={form.climbSent}
-                  onValueChange={(value) => setForm({ ...form, climbSent: value })}
+                  selectedValue={form.climbsent}
+                  onValueChange={(value) => setForm({ ...form, climbsent: value })}
                 >
                   <Picker.Item label="Sent!" value={true} />
                   <Picker.Item label="Not yet!" value={false} />
