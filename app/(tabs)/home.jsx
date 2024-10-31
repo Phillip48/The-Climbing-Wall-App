@@ -43,8 +43,10 @@ const Home = () => {
             { value: 8, label: "V8" },
           ];
           console.log("No sends to display", barData);
+          count = 0;
           return barData;
         }
+        count = 0;
         return barData;
       }
       let dataObj = {
@@ -67,6 +69,7 @@ const Home = () => {
       count++;
     });
   };
+
   useEffect(() => {
     climbingGraph();
   }, [climbingGraph]);
@@ -75,11 +78,26 @@ const Home = () => {
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
+        renderItem={({ item }) => (
+          <SendCard
+            title={item.title}
+            user={user}
+            grade={item.grade}
+            attempts={item.attempts}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            notes={item.notes}
+            climber={item.users.username}
+            avatar={item.users.avatar}
+            date={item.date}
+            itemId={item.$id}
+          />
+        )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         ListHeaderComponent={() => (
-          <View className="flex my-6 px-4 space-y-6">
+          <View style={{marginBottom:430}} className="flex my-6 px-4 space-y-6">
             <View className="flex justify-between items-start flex-row mb-6">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">
@@ -109,7 +127,7 @@ const Home = () => {
                 Dashboard
               </Text>
               <View
-                className="w-full"
+                className="w-full mb-3"
                 style={{
                   flex: 1,
                   justifyContent: "center",
@@ -122,8 +140,8 @@ const Home = () => {
                     justifyContent: "center",
                     alignItems: "center",
                   }}
-                  barWidth={22}
-                  width={270}
+                  barWidth={20}
+                  width={260}
                   height={300}
                   noOfSections={5}
                   barBorderRadius={4}
@@ -136,25 +154,11 @@ const Home = () => {
                   xAxisColor={"white"}
                   yAxisColor={"white"}
                   yAxisTextStyle={{ color: "white" }}
-                  isAnimated
+                  // isAnimated
                 />
               </View>
             </View>
           </View>
-        )}
-        renderItem={({ item }) => (
-          <SendCard
-            title={item.title}
-            user={user}
-            grade={item.grade}
-            attempts={item.attempts}
-            thumbnail={item.thumbnail}
-            video={item.video}
-            notes={item.notes}
-            climber={item.users.username}
-            avatar={item.users.avatar}
-            itemId={item.$id}
-          />
         )}
         ListEmptyComponent={() => (
           <EmptyState title="No Sends Found" subtitle="No sends created yet" />

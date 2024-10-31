@@ -167,6 +167,7 @@ const Projects = () => {
             climber={item.users.username}
             avatar={item.users.avatar}
             itemId={item.$id}
+            date={item.date}
           />
         )}
         ListHeaderComponent={() => (

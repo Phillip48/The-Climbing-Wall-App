@@ -54,6 +54,7 @@ const Profile = () => {
             notes={item.notes}
             user={user}
             itemId={item.$id}
+            date={item.date}
             // avatar={item.climber.avatar}
           />
         )}
@@ -95,19 +96,19 @@ const Profile = () => {
                 title={posts.length || 0}
                 subtitle="Sends"
                 titleStyles="text-xl"
-                containerStyles="mr-10"
+                containerStyles="mr-6"
               />
               <InfoBox
                 title={totalAttempts() || 0}
                 subtitle="Atempts"
                 titleStyles="text-xl"
-                containerStyles="mr-10"
+                containerStyles="mr-6"
               />
                <InfoBox
                 title={user.maxTopRopingGrade || "N/A"}
                 subtitle={"Max Top\n Roping"}
                 titleStyles="text-xl"
-                containerStyles="mr-10"
+                containerStyles="mr-6"
               />
               <InfoBox
                 title={user.maxBoulderingGrade}

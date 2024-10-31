@@ -238,6 +238,12 @@ const ProjectCard = ({
               className="text-sm text-gray-100 font-pregular"
               numberOfLines={1}
             >
+              Date: {date? date:'No Date Recorded'}
+            </Text>
+            <Text
+              className="text-sm text-gray-100 font-pregular"
+              numberOfLines={1}
+            >
               Climber: {climber} -{" "}
               {climbsent ? "Climb Sent!" : "Climb Not Sent!"}
             </Text>
