@@ -106,6 +106,7 @@ const Create = () => {
 
     setUploading(true);
     try {
+      console.log('date before creating', form.date)
       await createSendPost({
         ...form,
         userId: user.$id,

@@ -104,6 +104,7 @@ const SendCard = ({
       setModalEditVisible(true);
       return;
     } else if (str == "delete") {
+      
       try {
         await deleteSendPost(itemId, user.$id);
         Alert.alert("Success", "Post deleted successfully");

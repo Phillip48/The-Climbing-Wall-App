@@ -127,6 +127,7 @@ const Projects = () => {
         userId: user.$id,
       });
       Alert.alert("Success", "Post uploaded successfully");
+      setModalVisible(!modalVisible)
       router.push("/projects");
     } catch (error) {
       Alert.alert("Error", error.message);
