@@ -81,8 +81,8 @@ const Create = () => {
     const result = await DocumentPicker.getDocumentAsync({
       type:
         selectType === "image"
-          ? ["image/png", "image/jpg"]
-          : ["video/mp4", "video/gif"],
+          ? ["image/png", "image/heic", "image/jpg"]
+          : ["video/mp4", "video/mov", "video/gif"],
     });
 
     if (!result.canceled) {

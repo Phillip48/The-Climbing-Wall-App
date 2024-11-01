@@ -121,54 +121,6 @@ const SendCard = ({
     }
   };
 
-  // Function to check if there is a video with the send. If there isnt
-  // then display text, if there is show video
-  const videoUploaded = (video) => {
-    if (video == null) {
-      return (
-        <Text style={{ color: "#fff", marginTop: 10 }}>
-          No video for the send!
-        </Text>
-      );
-    } else {
-      // HTML/CODE to play video
-      <>
-        {play ? (
-          <Video
-            source={{ uri: video }}
-            className="w-full h-60 rounded-xl mt-3"
-            resizeMode={ResizeMode.CONTAIN}
-            useNativeControls
-            shouldPlay
-            onPlaybackStatusUpdate={(status) => {
-              if (status.didJustFinish) {
-                setPlay(false);
-              }
-            }}
-          />
-        ) : (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => setPlay(true)}
-            className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-          >
-            <Image
-              source={{ uri: thumbnail }}
-              className="w-full h-full rounded-xl mt-3"
-              resizeMode="cover"
-            />
-
-            <Image
-              source={icons.play}
-              className="w-12 h-12 absolute"
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-        )}
-      </>;
-    }
-  };
-
   // Submit function for editting the send
   const submit = async () => {
     if (form.attempts === "" || form.grade === "") {
@@ -340,40 +292,44 @@ const SendCard = ({
         </Modal>
       </View>
 
-      {videoUploaded(video)}
-
-      {/* {play ? (
-        <Video
-          source={{ uri: video }}
-          className="w-full h-60 rounded-xl mt-3"
-          resizeMode={ResizeMode.CONTAIN}
-          useNativeControls
-          shouldPlay
-          onPlaybackStatusUpdate={(status) => {
-            if (status.didJustFinish) {
-              setPlay(false);
-            }
-          }}
-        />
+      {video == null ? (
+        <Text style={{marginTop:10}} className={"text-sm text-gray-100 font-pregular"}>No Video</Text>
       ) : (
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => setPlay(true)}
-          className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-        >
-          <Image
-            source={{ uri: thumbnail }}
-            className="w-full h-full rounded-xl mt-3"
-            resizeMode="cover"
-          />
+        <>
+          {play ? (
+            <Video
+              source={{ uri: video }}
+              className="w-full h-60 rounded-xl mt-3"
+              resizeMode={ResizeMode.CONTAIN}
+              useNativeControls
+              shouldPlay
+              onPlaybackStatusUpdate={(status) => {
+                if (status.didJustFinish) {
+                  setPlay(false);
+                }
+              }}
+            />
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => setPlay(true)}
+              className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
+            >
+              <Image
+                source={{ uri: thumbnail }}
+                className="w-full h-full rounded-xl mt-3"
+                resizeMode="cover"
+              />
 
-          <Image
-            source={icons.play}
-            className="w-12 h-12 absolute"
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      )} */}
+              <Image
+                source={icons.play}
+                className="w-12 h-12 absolute"
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          )}
+        </>
+      )}
       <Modal
         animationType="slide"
         swipeToClose={false}
@@ -654,7 +610,19 @@ const SendCard = ({
                   /> */}
                 {/* <Text className="text-2xl text-white font-psemibold">Upload Video</Text> */}
                 <View className="mt-7 space-y-2">
-                  <Text className="text-base font-pmedium">Upload Video</Text>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: "Poppins-Medium",
+                      marginBottom: 0,
+                      marginTop: 30,
+                      color: "white",
+                    }}
+                  >
+                    Upload Video
+                  </Text>
 
                   <TouchableOpacity onPress={() => openPicker("video")}>
                     {form.video ? (
