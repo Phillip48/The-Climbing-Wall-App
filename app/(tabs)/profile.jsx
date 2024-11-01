@@ -12,7 +12,6 @@ const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
   const { data: posts } = useAppwrite(() => getUserSends(user.$id));
   // const { data: projectPosts } = useAppwrite(() => getUserProjects(user.$id));
-  // console.log(user)
 
   const totalAttempts = () => {
     let attemptTotal = 0;
