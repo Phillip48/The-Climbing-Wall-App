@@ -185,7 +185,9 @@ const ProjectCard = ({
         ...form,
         userId: user.$id,
         itemId: itemId,
-        climbsentstat: climbSentStat
+        climbsentstat: climbSentStat,
+        userMaxBoulderingGrade: user.maxBoulderingGrade,
+        userMaxTopRopingGrade: user.maxTopRopingGrade,
       });
       Alert.alert("Success", "Project updated successfully");
       router.push("/projects");
@@ -231,7 +233,7 @@ const ProjectCard = ({
               className="font-psemibold text-xs text-white"
               numberOfLines={1}
             >
-              {title} 
+              Title: {title} 
             </Text>
             <Text
               className="font-psemibold text-xs text-white"
@@ -652,7 +654,7 @@ const ProjectCard = ({
                   </Text>
                   {show && (
                     <DateTimePicker
-                      value={date}
+                      value={pickerDate}
                       mode={mode}
                       is24Hour={true}
                       onChange={onChange}

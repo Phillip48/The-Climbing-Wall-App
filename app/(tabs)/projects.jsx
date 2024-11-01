@@ -4,6 +4,7 @@ import {
   Modal,
   View,
   StyleSheet,
+  TextInput,
   TouchableOpacity,
   FlatList,
   Image,
@@ -48,6 +49,7 @@ const Projects = () => {
   };
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
+    title: "",
     grade: "",
     sessions: "",
     video: null,
@@ -127,6 +129,9 @@ const Projects = () => {
       await createProjectPost({
         ...form,
         userId: user.$id,
+        // itemId: itemId,
+        userMaxBoulderingGrade: user.maxBoulderingGrade,
+        userMaxTopRopingGrade: user.maxTopRopingGrade,
       });
       Alert.alert("Success", "Post uploaded successfully");
       setModalVisible(!modalVisible);
@@ -135,6 +140,7 @@ const Projects = () => {
       Alert.alert("Error", error.message);
     } finally {
       setForm({
+        title: "",
         grade: "",
         sessions: "",
         video: null,
@@ -183,6 +189,9 @@ const Projects = () => {
                   </Text>
                   <Text className="text-2xl font-psemibold text-white">
                     View Your Projects
+                  </Text>
+                  <Text style={{width:230}} className="font-pmedium text-sm text-gray-100">
+                    Once you have sent your project we will automatically move it to sends!
                   </Text>
                 </View>
 
@@ -253,6 +262,28 @@ const Projects = () => {
             </View>
             <View>
               <View style={{ flex: 1, flexDirection: "column", width: "100%" }}>
+                <Text
+                  className="font-psemibold"
+                  style={{
+                    fontSize: 16,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "Poppins-Medium",
+                    marginBottom: 0,
+                    marginTop: 30,
+                  }}
+                >
+                  Name Your Project
+                </Text>
+                <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
+                  <TextInput
+                    className="flex-1 text-white font-psemibold text-base"
+                    placeholderTextColor="#7B7B8B"
+                    value={form.title}
+                    style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
+                    onChangeText={(e) => setForm({ ...form, title: e })}
+                  />
+                </View>
                 <Text
                   className="font-psemibold"
                   style={{

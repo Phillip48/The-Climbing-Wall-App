@@ -5,13 +5,21 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import useAppwrite from "../../lib/useAppwrite";
 import { searchSendsGrade, searchProjectsGrade } from "../../lib/appwrite";
-import { EmptyState, SearchInput, SendCard, ProjectCard } from "../../components";
+import { useGlobalContext } from "../../context/GlobalProvider";
+import {
+  EmptyState,
+  SearchInput,
+  SendCard,
+  ProjectCard,
+} from "../../components";
 
 const Search = () => {
+  const { user, setUser, setIsLogged } = useGlobalContext();
   const { query } = useLocalSearchParams();
   const { data: posts, refetch } = useAppwrite(() => searchSendsGrade(query));
-  const { data: projectPosts, projectRefetch } = useAppwrite(() => searchProjectsGrade(query));
-
+  // const { data: projectPosts, projectRefetch } = useAppwrite(() =>
+  //   searchProjectsGrade(query)
+  // );
 
   useEffect(() => {
     refetch();
@@ -26,9 +34,12 @@ const Search = () => {
           <SendCard
             grade={item.grade}
             thumbnail={item.thumbnail}
-            video={item.video}
-            climber={item.climber.username}
-            avatar={item.climber.avatar}
+            attempts={item.attempts}
+            climber={item.users.username}
+            notes={item.notes}
+            user={user}
+            itemId={item.$id}
+            date={item.date}
           />
         )}
         ListHeaderComponent={() => (
@@ -51,41 +62,6 @@ const Search = () => {
           <EmptyState
             title="No Sends Found"
             subtitle="No sends found for this search query"
-          />
-        )}
-      />
-      <FlatList
-        data={projectPosts}
-        keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <ProjectCard
-            grade={item.grade}
-            thumbnail={item.thumbnail}
-            video={item.video}
-            climber={item.climber.username}
-            avatar={item.climber.avatar}
-          />
-        )}
-        ListHeaderComponent={() => (
-          <>
-            <View className="flex my-6 px-4">
-              <Text className="font-pmedium text-gray-100 text-sm">
-                Search Results for projects
-              </Text>
-              <Text className="text-2xl font-psemibold text-white mt-1">
-                {query}
-              </Text>
-
-              <View className="mt-6 mb-8">
-                <SearchInput initialQuery={query} refetch={refetch} />
-              </View>
-            </View>
-          </>
-        )}
-        ListEmptyComponent={() => (
-          <EmptyState
-            title="No Projetcs Found"
-            subtitle="No projects found for this search query"
           />
         )}
       />

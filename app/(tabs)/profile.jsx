@@ -45,8 +45,10 @@ const Profile = () => {
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <SendCard
+            title={item.title}
             grade={item.grade}
             thumbnail={item.thumbnail}
+            video={item.video}
             attempts={item.attempts}
             climber={item.users.username}
             notes={item.notes}

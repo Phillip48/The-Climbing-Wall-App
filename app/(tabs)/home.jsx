@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, Image, RefreshControl, Text, View } from "react-native";
+import { FlatList, useWindowDimensions , Image, RefreshControl, Text, View } from "react-native";
 
 import { images } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
@@ -28,6 +28,7 @@ const Home = () => {
     await climbingGraph();
     setRefreshing(false);
   };
+  const { width } = useWindowDimensions();
 
   const climbingGraph = async () => {
     posts.forEach((post) => {
@@ -97,7 +98,7 @@ const Home = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         ListHeaderComponent={() => (
-          <View style={{marginBottom:430}} className="flex my-6 px-4 space-y-6">
+          <View style={{marginBottom:430}} className="mb-430 flex my-6 px-4 space-y-6">
             <View className="flex justify-between items-start flex-row mb-6">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">
@@ -141,7 +142,7 @@ const Home = () => {
                     alignItems: "center",
                   }}
                   barWidth={20}
-                  width={260}
+                  width={width * 0.8}
                   height={300}
                   noOfSections={5}
                   barBorderRadius={4}

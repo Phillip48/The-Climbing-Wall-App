@@ -179,6 +179,8 @@ const SendCard = ({
         ...form,
         userId: user.$id,
         itemId: itemId,
+        userMaxBoulderingGrade: user.maxBoulderingGrade,
+        userMaxTopRopingGrade: user.maxTopRopingGrade,
       });
       Alert.alert("Success", "Send updated successfully");
       router.push("/profile");
@@ -222,7 +224,7 @@ const SendCard = ({
               className="font-psemibold text-xs text-white"
               numberOfLines={1}
             >
-              {title}
+              Title: {title}
             </Text>
             <Text
               className="font-psemibold text-sm text-white"
@@ -583,7 +585,7 @@ const SendCard = ({
                 </Text>
                 {show && (
                   <DateTimePicker
-                    value={date}
+                    value={pickerDate}
                     mode={mode}
                     is24Hour={true}
                     onChange={onChange}
