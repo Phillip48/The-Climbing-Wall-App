@@ -17,13 +17,20 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { icons } from "../../constants";
 import { createSendPost } from "../../lib/appwrite";
-import { CustomButton, FormField } from "../../components";
+import {
+  CustomButton,
+  FormField,
+  EmptyState,
+  SendCard,
+} from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Create = () => {
   const { user } = useGlobalContext();
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
+    warmup: false,
+    title: "",
     grade: "",
     video: null,
     thumbnail: null,
@@ -111,6 +118,8 @@ const Create = () => {
       Alert.alert("Error", error.message);
     } finally {
       setForm({
+        warmup: false,
+        title: "",
         grade: "",
         video: null,
         thumbnail: null,
@@ -232,6 +241,34 @@ const Create = () => {
           handleChangeText={(e) => setForm({ ...form, attempts: e })}
           otherStyles="mt-7"
         />
+        <Text
+          className="font-psemibold"
+          style={{
+            fontSize: 16,
+            color: "#CDCDE0",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "Poppins-Medium",
+            marginTop: 30,
+          }}
+        >
+          Was this a warmup
+        </Text>
+        <Picker
+          style={{
+            fontSize: 14,
+            color: "#CDCDE0",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "Poppins-Medium",
+          }}
+          className="font-psemibold"
+          selectedValue={form.warmup}
+          onValueChange={(value) => setForm({ ...form, warmup: value })}
+        >
+          <Picker.Item label="Yes" value={true} />
+          <Picker.Item label="No" value={false} />
+        </Picker>
         <View
           style={{
             flex: 1,

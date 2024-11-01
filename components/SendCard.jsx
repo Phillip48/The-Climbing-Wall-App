@@ -30,6 +30,7 @@ const SendCard = ({
   video,
   itemId,
   date,
+  warmup,
 }) => {
   const [play, setPlay] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -42,6 +43,7 @@ const SendCard = ({
   // Convert to string to display in edit modal
   let newAttempts = attempts.toString();
   const [form, setForm] = useState({
+    warmup: warmup,
     title: title,
     grade: grade,
     video: video,
@@ -188,6 +190,7 @@ const SendCard = ({
       Alert.alert("Error", error.message);
     } finally {
       setForm({
+        warmup: warmup,
         title: title,
         grade: grade,
         video: video,
@@ -522,6 +525,36 @@ const SendCard = ({
                     onChangeText={(e) => setForm({ ...form, attempts: e })}
                   />
                 </View>
+
+                <Text
+                  className="font-psemibold"
+                  style={{
+                    fontSize: 16,
+
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "Poppins-Medium",
+                    marginBottom: 0,
+                    marginTop: 10,
+                  }}
+                >
+                  Was this a warmup
+                </Text>
+                <Picker
+                  style={{
+                    fontSize: 14,
+                    // color: "#CDCDE0",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "Poppins-SemiBold",
+                  }}
+                  className="font-psemibold"
+                  selectedValue={form.warmup}
+                  onValueChange={(value) => setForm({ ...form, warmup: value })}
+                >
+                  <Picker.Item label="Yes" value={true} />
+                  <Picker.Item label="No" value={false} />
+                </Picker>
                 {/* <FormField
                     title=""
                     style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
