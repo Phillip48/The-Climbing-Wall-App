@@ -18,17 +18,17 @@ const Profile = () => {
     let attemptTotal = 0;
     let funtioncount = 0;
     posts.forEach((send) => {
-      if(funtioncount == posts.length) {
+      if (funtioncount == posts.length) {
         // console.log('total', attemptTotal)
         return attemptTotal;
       }
       let functionAttempt = send.attempts;
-      attemptTotal = +attemptTotal + +functionAttempt
+      attemptTotal = +attemptTotal + +functionAttempt;
       // console.log(attemptTotal);
       funtioncount++;
-    })
+    });
     return attemptTotal;
-  }
+  };
 
   const logout = async () => {
     await signOut();
@@ -40,6 +40,7 @@ const Profile = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
+        removeClippedSubviews={false}
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
@@ -101,21 +102,21 @@ const Profile = () => {
                 titleStyles="text-xl"
                 containerStyles="mr-6"
               />
-               <InfoBox
-                title={user?.maxTopRopingGrade? user.maxTopRopingGrade : 'N/A'}
+              <InfoBox
+                title={user?.maxTopRopingGrade ? user.maxTopRopingGrade : "N/A"}
                 subtitle={"Max Top\n Roping"}
                 titleStyles="text-xl"
                 containerStyles="mr-6"
               />
               <InfoBox
-                title={user?.maxBoulderingGrade? user.maxBoulderingGrade : 'N/A'}
+                title={
+                  user?.maxBoulderingGrade ? user.maxBoulderingGrade : "N/A"
+                }
                 subtitle={"Max\n Bouldering "}
                 titleStyles="text-xl"
               />
             </View>
-            <View className="mt-5 flex flex-row">
-             
-            </View>
+            <View className="mt-5 flex flex-row"></View>
           </View>
         )}
       />

@@ -37,7 +37,9 @@ const Projects = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const { data: posts, refetch } = useAppwrite(() => getUsersProjects(user.$id));
+  const { data: posts, refetch } = useAppwrite(() =>
+    getUsersProjects(user.$id)
+  );
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
@@ -127,7 +129,7 @@ const Projects = () => {
         userId: user.$id,
       });
       Alert.alert("Success", "Post uploaded successfully");
-      setModalVisible(!modalVisible)
+      setModalVisible(!modalVisible);
       router.push("/projects");
     } catch (error) {
       Alert.alert("Error", error.message);
@@ -149,6 +151,7 @@ const Projects = () => {
   return (
     <SafeAreaView className=" bg-primary h-full">
       <FlatList
+        removeClippedSubviews={false}
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
@@ -381,7 +384,9 @@ const Projects = () => {
                   // style={{ height: 50, width: 150 }}
                   // onValueChange={setStatus}
                   selectedValue={form.climbsent}
-                  onValueChange={(value) => setForm({ ...form, climbsent: value })}
+                  onValueChange={(value) =>
+                    setForm({ ...form, climbsent: value })
+                  }
                 >
                   <Picker.Item label="Sent!" value={true} />
                   <Picker.Item label="Not yet!" value={false} />

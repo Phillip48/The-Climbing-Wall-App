@@ -333,332 +333,6 @@ const SendCard = ({
             </Picker>
           </View>
         </Modal>
-        <Modal
-          animationType="slide"
-          swipeToClose={false}
-          swipeArea={20} // The height in pixels of the swipeable area, window height by default
-          swipeThreshold={50} // The threshold to reach in pixels to close the modal
-          transparent={true}
-          visible={modalEditVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            setModalEditVisible(!modalEditVisible);
-          }}
-        >
-          <ScrollView>
-            <View style={styles.centeredView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 20,
-                  width: "100%",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{ fontSize: 16 }} className="font-psemibold">
-                  Edit Send!
-                </Text>
-                <TouchableOpacity
-                  className={` bg-secondary rounded-xl min-h-[6px] w-[26px] flex flex-row justify-center items-center`}
-                  onPress={() => setModalEditVisible(!modalEditVisible)}
-                >
-                  <Text className={`text-primary font-psemibold text-lg`}>
-                    X
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <View>
-                <View
-                  style={{ flex: 1, flexDirection: "column", width: "100%" }}
-                >
-                  <Text
-                    className="font-psemibold"
-                    style={{
-                      fontSize: 16,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "Poppins-Medium",
-                      marginBottom: 0,
-                      marginTop: 30,
-                    }}
-                  >
-                    Name Your Send
-                  </Text>
-                  <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
-                    <TextInput
-                      className="flex-1 text-white font-psemibold text-base"
-                      placeholderTextColor="#7B7B8B"
-                      value={form.title}
-                      style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
-                      onChangeText={(e) => setForm({ ...form, title: e })}
-                    />
-                  </View>
-                  <Text
-                    className="font-psemibold"
-                    style={{
-                      fontSize: 16,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "Poppins-Medium",
-                      marginBottom: -10,
-                      marginTop: 30,
-                    }}
-                  >
-                    Select bouldering or top roping grade
-                  </Text>
-                  <Picker
-                    style={{
-                      fontSize: 14,
-                      // color: "#CDCDE0",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "Poppins-SemiBold",
-                    }}
-                    className="font-psemibold"
-                    selectedValue={form.grade}
-                    onValueChange={(value) =>
-                      setForm({ ...form, grade: value })
-                    }
-                  >
-                    <Picker.Item label="V0" value="V0" />
-                    <Picker.Item label="V1" value="V1" />
-                    <Picker.Item label="V2" value="V2" />
-                    <Picker.Item label="V3" value="V3" />
-                    <Picker.Item label="V4" value="V4" />
-                    <Picker.Item label="V5" value="V5" />
-                    <Picker.Item label="V6" value="V6" />
-                    <Picker.Item label="V7" value="V7" />
-                    <Picker.Item label="V8" value="V8" />
-                    <Picker.Item label="V9" value="V9" />
-                    <Picker.Item label="V10" value="V10" />
-                    <Picker.Item label="V11" value="V11" />
-                    <Picker.Item label="V12" value="V12" />
-                    <Picker.Item label="V13" value="V13" />
-                    <Picker.Item label="V14" value="V14" />
-                    <Picker.Item label="V15" value="V15" />
-                    <Picker.Item label="V16" value="V16" />
-                    <Picker.Item label="V17" value="V17" />
-                    <Picker.Item label="5.2" value="5.2" />
-                    <Picker.Item label="5.3" value="5.3" />
-                    <Picker.Item label="5.4" value="5.4" />
-                    <Picker.Item label="5.5" value="5.5" />
-                    <Picker.Item label="5.6" value="5.6" />
-                    <Picker.Item label="5.7" value="5.7" />
-                    <Picker.Item label="5.8" value="5.8" />
-                    <Picker.Item label="5.9" value="5.9" />
-                    <Picker.Item label="5.10a" value="5.10a" />
-                    <Picker.Item label="5.10b" value="5.10b" />
-                    <Picker.Item label="5.10c" value="5.10c" />
-                    <Picker.Item label="5.10d" value="5.10d" />
-                    <Picker.Item label="5.11a" value="5.11a" />
-                    <Picker.Item label="5.11b" value="5.11b" />
-                    <Picker.Item label="5.11c" value="5.11c" />
-                    <Picker.Item label="5.11d" value="5.11d" />
-                    <Picker.Item label="5.12a" value="5.12a" />
-                    <Picker.Item label="5.12b" value="5.12b" />
-                    <Picker.Item label="5.12c" value="5.12c" />
-                    <Picker.Item label="5.12d" value="5.12d" />
-                    <Picker.Item label="5.13a" value="5.13a" />
-                    <Picker.Item label="5.13b" value="5.13b" />
-                    <Picker.Item label="5.13c" value="5.13c" />
-                    <Picker.Item label="5.13d" value="5.13d" />
-                    <Picker.Item label="5.14a" value="5.14a" />
-                    <Picker.Item label="5.14b" value="5.14b" />
-                    <Picker.Item label="5.14c" value="5.14c" />
-                    <Picker.Item label="5.14d" value="5.14d" />
-                  </Picker>
-                  <Text
-                    className="font-psemibold"
-                    style={{
-                      fontSize: 16,
-
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "Poppins-Medium",
-                      marginBottom: 0,
-                      marginTop: 10,
-                    }}
-                  >
-                    Attempts
-                  </Text>
-                  <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
-                    <TextInput
-                      className="flex-1 text-white font-psemibold text-base"
-                      placeholderTextColor="#7B7B8B"
-                      value={form.attempts}
-                      onChangeText={(e) => setForm({ ...form, attempts: e })}
-                    />
-                  </View>
-                  {/* <FormField
-                    title=""
-                    style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
-                    value={form.attempts}
-                    handleChangeText={(e) => setForm({ ...form, attempts: e })}
-                    otherStyles=""
-                  /> */}
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: "row",
-                      justifyContent: "space-around",
-                      alignItems: "center",
-                      marginTop: 10,
-                    }}
-                  >
-                    <TouchableOpacity
-                      onPress={showDatepicker}
-                      activeOpacity={0.7}
-                      style={{
-                        marginTop: 0,
-                        marginLeft: 0,
-                        marginRight: 0,
-                        paddingLeft: 10,
-                        paddingRight: 10,
-                      }}
-                      className={` bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
-                    >
-                      <Text className={`text-primary font-psemibold text-lg`}>
-                        Select Date
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={showTimepicker}
-                      activeOpacity={0.7}
-                      style={{
-                        marginTop: 0,
-                        marginLeft: 0,
-                        marginRight: 0,
-                        paddingLeft: 10,
-                        paddingRight: 10,
-                      }}
-                      className={` bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
-                    >
-                      <Text className={`text-primary font-psemibold text-lg`}>
-                        Select Time
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "black",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "Poppins-Medium",
-                      marginTop: 10,
-                    }}
-                  >
-                    Selected: {pickerDate.toLocaleString()}
-                  </Text>
-                  {show && (
-                    <DateTimePicker
-                      value={date}
-                      mode={mode}
-                      is24Hour={true}
-                      onChange={onChange}
-                    />
-                  )}
-                  <Text
-                    // className="font-psemibold"
-                    style={{
-                      fontSize: 16,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "Poppins-Medium",
-                      marginBottom: 5,
-                      marginTop: 10,
-                    }}
-                  >
-                    Notes
-                  </Text>
-                  <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
-                    <TextInput
-                      className="flex-1 text-white font-psemibold text-base"
-                      placeholderTextColor="#7B7B8B"
-                      value={form.notes}
-                      onChangeText={(e) => setForm({ ...form, notes: e })}
-                    />
-                  </View>
-
-                  {/* <FormField
-                    title=""
-                    value={form.notes}
-                    handleChangeText={(e) => setForm({ ...form, notes: e })}
-                    otherStyles=""
-                  /> */}
-                  {/* <Text className="text-2xl text-white font-psemibold">Upload Video</Text> */}
-                  <View className="mt-7 space-y-2">
-                    <Text className="text-base font-pmedium">Upload Video</Text>
-
-                    <TouchableOpacity onPress={() => openPicker("video")}>
-                      {form.video ? (
-                        <Video
-                          source={{ uri: form.video.uri }}
-                          className="w-full h-64 rounded-2xl"
-                          useNativeControls
-                          resizeMode={ResizeMode.COVER}
-                          isLooping
-                        />
-                      ) : (
-                        <View className="w-full h-40 px-4 bg-black-100 rounded-2xl border border-black-200 flex justify-center items-center">
-                          <View className="w-14 h-14 border border-dashed border-secondary-100 flex justify-center items-center">
-                            <Image
-                              source={icons.upload}
-                              resizeMode="contain"
-                              alt="upload"
-                              className="w-1/2 h-1/2"
-                            />
-                          </View>
-                        </View>
-                      )}
-                    </TouchableOpacity>
-                  </View>
-
-                  <View className="mt-7 space-y-2">
-                    <Text className="text-base font-pmedium">
-                      Thumbnail Image
-                    </Text>
-
-                    <TouchableOpacity onPress={() => openPicker("image")}>
-                      {form.thumbnail ? (
-                        <Image
-                          source={{ uri: form.thumbnail.uri }}
-                          resizeMode="cover"
-                          className="w-full h-64 rounded-2xl"
-                        />
-                      ) : (
-                        <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 flex justify-center items-center flex-row space-x-2">
-                          <Image
-                            source={icons.upload}
-                            resizeMode="contain"
-                            alt="upload"
-                            className="w-5 h-5"
-                          />
-                          <Text className="text-sm text-gray-100 font-pmedium">
-                            Choose a file
-                          </Text>
-                        </View>
-                      )}
-                    </TouchableOpacity>
-                  </View>
-
-                  <TouchableOpacity
-                    onPress={submit}
-                    activeOpacity={0.7}
-                    className={`bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
-                    // disabled={uploading}
-                    style={{ marginTop: 20 }}
-                  >
-                    <Text className={`text-primary font-psemibold text-lg`}>
-                      Submit & Publish
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </ScrollView>
-        </Modal>
       </View>
 
       {videoUploaded(video)}
@@ -695,6 +369,326 @@ const SendCard = ({
           />
         </TouchableOpacity>
       )} */}
+      <Modal
+        animationType="slide"
+        swipeToClose={false}
+        swipeArea={20} // The height in pixels of the swipeable area, window height by default
+        swipeThreshold={50} // The threshold to reach in pixels to close the modal
+        transparent={true}
+        visible={modalEditVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalEditVisible(!modalEditVisible);
+        }}
+      >
+        <ScrollView>
+          <View style={styles.centeredView}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+                width: "100%",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 16 }} className="font-psemibold">
+                Edit Send!
+              </Text>
+              <TouchableOpacity
+                className={` bg-secondary rounded-xl min-h-[6px] w-[26px] flex flex-row justify-center items-center`}
+                onPress={() => setModalEditVisible(!modalEditVisible)}
+              >
+                <Text className={`text-primary font-psemibold text-lg`}>X</Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <View style={{ flex: 1, flexDirection: "column", width: "100%" }}>
+                <Text
+                  className="font-psemibold"
+                  style={{
+                    fontSize: 16,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "Poppins-Medium",
+                    marginBottom: 0,
+                    marginTop: 30,
+                  }}
+                >
+                  Name Your Send
+                </Text>
+                <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
+                  <TextInput
+                    className="flex-1 text-white font-psemibold text-base"
+                    placeholderTextColor="#7B7B8B"
+                    value={form.title}
+                    style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
+                    onChangeText={(e) => setForm({ ...form, title: e })}
+                  />
+                </View>
+                <Text
+                  className="font-psemibold"
+                  style={{
+                    fontSize: 16,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "Poppins-Medium",
+                    marginBottom: -10,
+                    marginTop: 30,
+                  }}
+                >
+                  Select bouldering or top roping grade
+                </Text>
+                <Picker
+                  style={{
+                    fontSize: 14,
+                    // color: "#CDCDE0",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "Poppins-SemiBold",
+                  }}
+                  className="font-psemibold"
+                  selectedValue={form.grade}
+                  onValueChange={(value) => setForm({ ...form, grade: value })}
+                >
+                  <Picker.Item label="V0" value="V0" />
+                  <Picker.Item label="V1" value="V1" />
+                  <Picker.Item label="V2" value="V2" />
+                  <Picker.Item label="V3" value="V3" />
+                  <Picker.Item label="V4" value="V4" />
+                  <Picker.Item label="V5" value="V5" />
+                  <Picker.Item label="V6" value="V6" />
+                  <Picker.Item label="V7" value="V7" />
+                  <Picker.Item label="V8" value="V8" />
+                  <Picker.Item label="V9" value="V9" />
+                  <Picker.Item label="V10" value="V10" />
+                  <Picker.Item label="V11" value="V11" />
+                  <Picker.Item label="V12" value="V12" />
+                  <Picker.Item label="V13" value="V13" />
+                  <Picker.Item label="V14" value="V14" />
+                  <Picker.Item label="V15" value="V15" />
+                  <Picker.Item label="V16" value="V16" />
+                  <Picker.Item label="V17" value="V17" />
+                  <Picker.Item label="5.2" value="5.2" />
+                  <Picker.Item label="5.3" value="5.3" />
+                  <Picker.Item label="5.4" value="5.4" />
+                  <Picker.Item label="5.5" value="5.5" />
+                  <Picker.Item label="5.6" value="5.6" />
+                  <Picker.Item label="5.7" value="5.7" />
+                  <Picker.Item label="5.8" value="5.8" />
+                  <Picker.Item label="5.9" value="5.9" />
+                  <Picker.Item label="5.10a" value="5.10a" />
+                  <Picker.Item label="5.10b" value="5.10b" />
+                  <Picker.Item label="5.10c" value="5.10c" />
+                  <Picker.Item label="5.10d" value="5.10d" />
+                  <Picker.Item label="5.11a" value="5.11a" />
+                  <Picker.Item label="5.11b" value="5.11b" />
+                  <Picker.Item label="5.11c" value="5.11c" />
+                  <Picker.Item label="5.11d" value="5.11d" />
+                  <Picker.Item label="5.12a" value="5.12a" />
+                  <Picker.Item label="5.12b" value="5.12b" />
+                  <Picker.Item label="5.12c" value="5.12c" />
+                  <Picker.Item label="5.12d" value="5.12d" />
+                  <Picker.Item label="5.13a" value="5.13a" />
+                  <Picker.Item label="5.13b" value="5.13b" />
+                  <Picker.Item label="5.13c" value="5.13c" />
+                  <Picker.Item label="5.13d" value="5.13d" />
+                  <Picker.Item label="5.14a" value="5.14a" />
+                  <Picker.Item label="5.14b" value="5.14b" />
+                  <Picker.Item label="5.14c" value="5.14c" />
+                  <Picker.Item label="5.14d" value="5.14d" />
+                </Picker>
+                <Text
+                  className="font-psemibold"
+                  style={{
+                    fontSize: 16,
+
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "Poppins-Medium",
+                    marginBottom: 0,
+                    marginTop: 10,
+                  }}
+                >
+                  Attempts
+                </Text>
+                <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
+                  <TextInput
+                    className="flex-1 text-white font-psemibold text-base"
+                    placeholderTextColor="#7B7B8B"
+                    value={form.attempts}
+                    onChangeText={(e) => setForm({ ...form, attempts: e })}
+                  />
+                </View>
+                {/* <FormField
+                    title=""
+                    style={{ fontFamily: "Poppins-SemiBold", marginTop: 0 }}
+                    value={form.attempts}
+                    handleChangeText={(e) => setForm({ ...form, attempts: e })}
+                    otherStyles=""
+                  /> */}
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                    marginTop: 10,
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={showDatepicker}
+                    activeOpacity={0.7}
+                    style={{
+                      marginTop: 0,
+                      marginLeft: 0,
+                      marginRight: 0,
+                      paddingLeft: 10,
+                      paddingRight: 10,
+                    }}
+                    className={` bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
+                  >
+                    <Text className={`text-primary font-psemibold text-lg`}>
+                      Select Date
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={showTimepicker}
+                    activeOpacity={0.7}
+                    style={{
+                      marginTop: 0,
+                      marginLeft: 0,
+                      marginRight: 0,
+                      paddingLeft: 10,
+                      paddingRight: 10,
+                    }}
+                    className={` bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
+                  >
+                    <Text className={`text-primary font-psemibold text-lg`}>
+                      Select Time
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    color: "black",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "Poppins-Medium",
+                    marginTop: 10,
+                  }}
+                >
+                  Selected: {pickerDate.toLocaleString()}
+                </Text>
+                {show && (
+                  <DateTimePicker
+                    value={date}
+                    mode={mode}
+                    is24Hour={true}
+                    onChange={onChange}
+                  />
+                )}
+                <Text
+                  // className="font-psemibold"
+                  style={{
+                    fontSize: 16,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "Poppins-Medium",
+                    marginBottom: 5,
+                    marginTop: 10,
+                  }}
+                >
+                  Notes
+                </Text>
+                <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
+                  <TextInput
+                    className="flex-1 text-white font-psemibold text-base"
+                    placeholderTextColor="#7B7B8B"
+                    value={form.notes}
+                    onChangeText={(e) => setForm({ ...form, notes: e })}
+                  />
+                </View>
+
+                {/* <FormField
+                    title=""
+                    value={form.notes}
+                    handleChangeText={(e) => setForm({ ...form, notes: e })}
+                    otherStyles=""
+                  /> */}
+                {/* <Text className="text-2xl text-white font-psemibold">Upload Video</Text> */}
+                <View className="mt-7 space-y-2">
+                  <Text className="text-base font-pmedium">Upload Video</Text>
+
+                  <TouchableOpacity onPress={() => openPicker("video")}>
+                    {form.video ? (
+                      <Video
+                        source={{ uri: form.video.uri }}
+                        className="w-full h-64 rounded-2xl"
+                        useNativeControls
+                        resizeMode={ResizeMode.COVER}
+                        isLooping
+                      />
+                    ) : (
+                      <View className="w-full h-40 px-4 bg-black-100 rounded-2xl border border-black-200 flex justify-center items-center">
+                        <View className="w-14 h-14 border border-dashed border-secondary-100 flex justify-center items-center">
+                          <Image
+                            source={icons.upload}
+                            resizeMode="contain"
+                            alt="upload"
+                            className="w-1/2 h-1/2"
+                          />
+                        </View>
+                      </View>
+                    )}
+                  </TouchableOpacity>
+                </View>
+
+                <View className="mt-7 space-y-2">
+                  <Text className="text-base font-pmedium">
+                    Thumbnail Image
+                  </Text>
+
+                  <TouchableOpacity onPress={() => openPicker("image")}>
+                    {form.thumbnail ? (
+                      <Image
+                        source={{ uri: form.thumbnail.uri }}
+                        resizeMode="cover"
+                        className="w-full h-64 rounded-2xl"
+                      />
+                    ) : (
+                      <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 flex justify-center items-center flex-row space-x-2">
+                        <Image
+                          source={icons.upload}
+                          resizeMode="contain"
+                          alt="upload"
+                          className="w-5 h-5"
+                        />
+                        <Text className="text-sm text-gray-100 font-pmedium">
+                          Choose a file
+                        </Text>
+                      </View>
+                    )}
+                  </TouchableOpacity>
+                </View>
+
+                <TouchableOpacity
+                  onPress={submit}
+                  activeOpacity={0.7}
+                  className={`bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center`}
+                  // disabled={uploading}
+                  style={{ marginTop: 20 }}
+                >
+                  <Text className={`text-primary font-psemibold text-lg`}>
+                    Submit & Publish
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </ScrollView>
+      </Modal>
     </View>
   );
 };

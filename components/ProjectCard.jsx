@@ -342,7 +342,43 @@ const ProjectCard = ({
             </Picker>
           </View>
         </Modal>
-        <Modal
+      </View>
+
+      {videoUploaded(video)}
+
+      {/* {play ? (
+        <Video
+          source={{ uri: video }}
+          className="w-full h-60 rounded-xl mt-3"
+          resizeMode={ResizeMode.CONTAIN}
+          useNativeControls
+          shouldPlay
+          onPlaybackStatusUpdate={(status) => {
+            if (status.didJustFinish) {
+              setPlay(false);
+            }
+          }}
+        />
+      ) : (
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => setPlay(true)}
+          className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
+        >
+          <Image
+            source={{ uri: thumbnail }}
+            className="w-full h-full rounded-xl mt-3"
+            resizeMode="cover"
+          />
+
+          <Image
+            source={icons.play}
+            className="w-12 h-12 absolute"
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      )} */}
+      <Modal
           animationType="slide"
           swipeToClose={false}
           swipeArea={20} // The height in pixels of the swipeable area, window height by default
@@ -716,42 +752,6 @@ const ProjectCard = ({
             </View>
           </ScrollView>
         </Modal>
-      </View>
-
-      {videoUploaded(video)}
-
-      {/* {play ? (
-        <Video
-          source={{ uri: video }}
-          className="w-full h-60 rounded-xl mt-3"
-          resizeMode={ResizeMode.CONTAIN}
-          useNativeControls
-          shouldPlay
-          onPlaybackStatusUpdate={(status) => {
-            if (status.didJustFinish) {
-              setPlay(false);
-            }
-          }}
-        />
-      ) : (
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => setPlay(true)}
-          className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-        >
-          <Image
-            source={{ uri: thumbnail }}
-            className="w-full h-full rounded-xl mt-3"
-            resizeMode="cover"
-          />
-
-          <Image
-            source={icons.play}
-            className="w-12 h-12 absolute"
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      )} */}
     </View>
   );
 };
