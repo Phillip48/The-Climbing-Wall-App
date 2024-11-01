@@ -58,7 +58,7 @@ const Home = () => {
             style={{
               color: "white",
               fontSize: 12,
-              marginBottom: 8,
+              marginBottom: 4,
               fontWeight: 700,
             }}
           >
@@ -79,26 +79,26 @@ const Home = () => {
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <SendCard
-            title={item.title}
-            user={user}
-            grade={item.grade}
-            attempts={item.attempts}
-            thumbnail={item.thumbnail}
-            video={item.video}
-            notes={item.notes}
-            climber={item.users.username}
-            avatar={item.users.avatar}
-            date={item.date}
-            itemId={item.$id}
-          />
-        )}
+        // renderItem={({ item }) => (
+        //   <SendCard
+        //     title={item.title}
+        //     user={user}
+        //     grade={item.grade}
+        //     attempts={item.attempts}
+        //     thumbnail={item.thumbnail}
+        //     video={item.video}
+        //     notes={item.notes}
+        //     climber={item.users.username}
+        //     avatar={item.users.avatar}
+        //     date={item.date}
+        //     itemId={item.$id}
+        //   />
+        // )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         ListHeaderComponent={() => (
-          <View style={{marginBottom:430}} className="mb-430 flex my-6 px-4 space-y-6">
+          <View style={{marginBottom:330}} className="mb-430 flex my-6 px-4 space-y-6">
             <View className="flex justify-between items-start flex-row mb-6">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">
