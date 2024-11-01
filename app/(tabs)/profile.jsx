@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Image, FlatList, TouchableOpacity } from "react-native";
+import { View, Image, Text, FlatList, TouchableOpacity } from "react-native";
 
 import { icons } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
@@ -43,27 +43,27 @@ const Profile = () => {
         removeClippedSubviews={false}
         data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <SendCard
-            title={item.title}
-            grade={item.grade}
-            thumbnail={item.thumbnail}
-            video={item.video}
-            attempts={item.attempts}
-            climber={item.users.username}
-            notes={item.notes}
-            user={user}
-            itemId={item.$id}
-            date={item.date}
-            // avatar={item.climber.avatar}
-          />
-        )}
-        ListEmptyComponent={() => (
-          <EmptyState
-            title="No Sends Found"
-            subtitle="No sends found for this profile"
-          />
-        )}
+        // renderItem={({ item }) => (
+        //   <SendCard
+        //     title={item.title}
+        //     grade={item.grade}
+        //     thumbnail={item.thumbnail}
+        //     video={item.video}
+        //     attempts={item.attempts}
+        //     climber={item.users.username}
+        //     notes={item.notes}
+        //     user={user}
+        //     itemId={item.$id}
+        //     date={item.date}
+        //     // avatar={item.climber.avatar}
+        //   />
+        // )}
+        // ListEmptyComponent={() => (
+        //   <EmptyState
+        //     title="No Sends Found"
+        //     subtitle="No sends found for this profile"
+        //   />
+        // )}
         ListHeaderComponent={() => (
           <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
             <TouchableOpacity
@@ -118,7 +118,16 @@ const Profile = () => {
                 titleStyles="text-xl"
               />
             </View>
-            <View className="mt-5 flex flex-row"></View>
+            <View style={{justifyContent: 'center', alignItems: 'start', marginTop: 20}} className="w-full mt-5 flex">
+              <Text className="font-pmedium text-sm text-gray-100">Bio:</Text>
+              <Text className="text-lg text-white font-psemibold">{user?.bio ? user.bio : ""}</Text>
+
+              {/* <InfoBox
+                title={user?.bio ? user.bio : ""}
+                // subtitle={"Bio"}
+                titleStyles="text-xl"
+              /> */}
+            </View>
           </View>
         )}
       />
