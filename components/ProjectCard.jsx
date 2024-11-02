@@ -457,7 +457,7 @@ const ProjectCard = ({
                     marginTop: 30,
                   }}
                 >
-                  Select bouldering or top roping grade
+                  Select bouldering or top roping grade*
                 </Text>
                 <Picker
                   style={{
@@ -529,7 +529,7 @@ const ProjectCard = ({
                     marginTop: 30,
                   }}
                 >
-                  Number of sessions
+                  Number of sessions*
                 </Text>
                 <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
                   <TextInput
@@ -558,7 +558,7 @@ const ProjectCard = ({
                     marginTop: 10,
                   }}
                 >
-                  Attempts
+                  Attempts*
                 </Text>
                 <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
                   <TextInput

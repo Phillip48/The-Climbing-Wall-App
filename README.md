@@ -9,6 +9,7 @@
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
 </p>
+<p>Please do not replicate or use this code as this is meant to only be used by me.</p>
 
 ## Table of contents
 
@@ -22,9 +23,30 @@
 
 ## The Project
 
-Create a Full Stack Web Application with the following features:
+Create a mobile app with the following features:
 
-- [x] Add here
+- [x] Create a user account and have the ability to sign in and out of the account
+- [x] Create, edit, and delete a project. The project has the following fields:
+  * Title
+  * Grade
+  * Attempts
+  * Sessions
+  * Notes
+  * Video 
+  * Thumbnail
+  * If the project was sent
+- [x] Create, edit, and delete a send. The send has the following fields:
+  * Title
+  * Grade
+  * Attempts
+  * Notes
+  * Video 
+  * Thumbnail
+  * Was the climb a warmup
+- [x] Have a page that shows the users projects and sends.
+- [x] Have a page that shows the users stats
+- [x] Connected with appwrite to hold and relay all data
+
 
 <!-- - [x] Use a Node and Express web server
 - [x] Backed by a MySQL database with a Sequelize ORM
@@ -39,7 +61,7 @@ Create a Full Stack Web Application with the following features:
 - [x] Meet good-quality coding standards (indentation, scoping, naming, etc.)
 - [x] Deployed using Heroku (with data) -->
 
-## Installation
+<!-- ## Installation
 
 You can access the deployed application with the Heroku link: (Not uplodaded yet)
 
@@ -54,13 +76,13 @@ To install the project follow these steps:
    - npm install
 
 3. Run the app with:
-   - npx expo start
+   - npx expo start -->
 
 ## Usage
 
 **User Story**
 
-As the user I want to ... track my climbing progress with a mobile app. This should allow me to create, read, upload and delete climbing sessions, training sessions, projects and sends.
+As the user I want to track my climbing progress with a mobile app. This should allow me to create, read, upload and delete projects and sends.
 
 **Screenshots of Application:**  
 

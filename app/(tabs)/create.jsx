@@ -288,7 +288,7 @@ const Create = () => {
                     marginTop: 30,
                   }}
                 >
-                  Select bouldering or top roping grade
+                  Select bouldering or top roping grade*
                 </Text>
                 <Picker
                   style={{
@@ -361,7 +361,7 @@ const Create = () => {
                     marginTop: 10,
                   }}
                 >
-                  Attempts
+                  Attempts*
                 </Text>
                 <FormField
                   title=""

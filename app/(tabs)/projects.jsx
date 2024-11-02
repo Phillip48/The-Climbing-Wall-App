@@ -295,7 +295,7 @@ const Projects = () => {
                     marginTop: 30,
                   }}
                 >
-                  Select bouldering or top roping grade
+                  Select bouldering or top roping grade*
                 </Text>
                 <Picker
                   style={{
@@ -367,7 +367,7 @@ const Projects = () => {
                     marginTop: 30,
                   }}
                 >
-                  Number of sessions
+                  Number of sessions*
                 </Text>
                 <FormField
                   title=""
@@ -388,7 +388,7 @@ const Projects = () => {
                     marginTop: 10,
                   }}
                 >
-                  Attempts
+                  Attempts*
                 </Text>
                 <FormField
                   title=""
