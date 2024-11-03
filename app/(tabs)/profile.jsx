@@ -13,15 +13,22 @@ import {
 
 import { icons } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
-import { getUserSends, signOut, getUserProjects, editProfile } from "../../lib/appwrite";
+import {
+  getUserSends,
+  signOut,
+  getUserProjects,
+  editProfile,
+} from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { EmptyState, InfoBox, SendCard } from "../../components";
+import { BarChart } from "react-native-gifted-charts";
 import {
-  BarChart,
   LineChart,
   PieChart,
-  PopulationPyramid,
-} from "react-native-gifted-charts";
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart,
+} from "react-native-chart-kit";
 
 const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
@@ -32,13 +39,15 @@ const Profile = () => {
     maxBoulderingGrade: user.maxBoulderingGrade,
     maxTopRopingGrade: user.maxTopRopingGrade,
     avatar: user.avatar,
-    userId: user.$id
+    userId: user.$id,
     // bio: bio,
   });
 
   const barData = [];
   const barDataTopRoping = [];
   const pieData = [];
+  const sendDates = [];
+  let dateCount = 0;
   let count = 0;
   const { width } = useWindowDimensions();
 
@@ -62,6 +71,7 @@ const Profile = () => {
     setRefreshing(true);
     await refetch();
     await climbingGraph();
+    await postsDate();
     setRefreshing(false);
   };
 
@@ -74,7 +84,7 @@ const Profile = () => {
 
   const editUserProfile = async () => {
     await editProfile(form);
-    return
+    return;
   };
 
   const climbingGraph = async () => {
@@ -155,10 +165,36 @@ const Profile = () => {
     });
   };
 
+  const postsDate = async () => {
+    if (posts.length - 1 == dateCount) {
+      if (sendDates.length == 0) {
+        console.log("No send dates to display", sendDates);
+        dateCount = 0;
+        return sendDates;
+      }
+      console.log("Loop done", sendDates);
+      return sendDates;
+    }
+    posts.forEach((send) => {
+      let formDate = send.date; //2024-10-30T17:57:00.000+00:00
+      let newDate = new Date(formDate);
+      let formattedDate = newDate.toISOString().split("T")[0]; //2024-10-30
+      let dataObj = {
+        date: formattedDate,
+        count: Number(send.attempts)
+      };
+      // console.log(dataObj);
+      sendDates.push(dataObj);
+      // console.log("Loop working count-", dateCount, dataObj);
+      dateCount++;
+    });
+  };
+
   useEffect(() => {
     climbingGraph();
     // warmUpChart();
-  }, [climbingGraph]);
+    postsDate();
+  }, [climbingGraph, postsDate]);
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
@@ -191,7 +227,15 @@ const Profile = () => {
         }
         ListHeaderComponent={() => (
           <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
-            <View style={{flex:1,flexDirection: 'row', marginBottom: 10, justifyContent: "space-between" }} className="w-full justify-center items-center">
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                marginBottom: 10,
+                justifyContent: "space-between",
+              }}
+              className="w-full justify-center items-center"
+            >
               <TouchableOpacity
                 onPress={editUserProfile}
                 // className="flex w-full items-start mb-10"
@@ -265,6 +309,7 @@ const Profile = () => {
               <Text className="text-lg font-pregular text-gray-100 mb-3">
                 Stats
               </Text>
+
               <View
                 className="w-full mb-3"
                 style={{
@@ -273,6 +318,27 @@ const Profile = () => {
                   // alignItems: "center",
                 }}
               >
+                <Text className="text-sm font-pregular text-gray-100 mb-3">
+                  Calendar Heatmap
+                </Text>
+                <ContributionGraph
+                  values={sendDates}
+                  // startDate={new Date("2024-08-01")}
+                  endDate={new Date("2025-01-01")}
+                  numDays={153}
+                  width={'100%'}
+                  height={220}
+                  chartConfig={{
+                    backgroundGradientFrom: "#161622",
+                    backgroundGradientFromOpacity: 0,
+                    backgroundGradientTo: "#161622",
+                    backgroundGradientToOpacity: 0,
+                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    strokeWidth: 3, // optional, default 3
+                    barPercentage: 0.5,
+                    useShadowColorFromDataset: false, // optional
+                  }}
+                />
                 <Text className="text-sm font-pregular text-gray-100 mb-3">
                   Bouldering
                 </Text>

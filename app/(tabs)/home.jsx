@@ -29,7 +29,7 @@ import {
 
 const Home = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
-  // const { data: posts, refetch } = useAppwrite(getAllSends);
+  const { data: userPosts } = useAppwrite(() => getUserSends(user.$id));
   const { data: posts, refetch } = useAppwrite(() => getLatestSends(user.$id));
   const [refreshing, setRefreshing] = useState(false);
   const barData = [];
@@ -45,11 +45,12 @@ const Home = () => {
     // await climbingGraph();
     setRefreshing(false);
   };
+
   const totalAttempts = () => {
     let attemptTotal = 0;
     let funtioncount = 0;
-    posts.forEach((send) => {
-      if (funtioncount == posts.length) {
+    userPosts.forEach((send) => {
+      if (funtioncount == userPosts.length) {
         // console.log('total', attemptTotal)
         return attemptTotal;
       }
@@ -254,7 +255,7 @@ const Home = () => {
                 <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
                   <View className=" flex flex-row">
                     <InfoBox
-                      title={posts.length || 0}
+                      title={userPosts.length || 0}
                       subtitle="Sends"
                       titleStyles="text-xl"
                       containerStyles="mr-6"
@@ -292,7 +293,7 @@ const Home = () => {
           </View>
         )}
         ListEmptyComponent={() => (
-          <EmptyState title="No Sends Found" subtitle="No sends created yet" />
+          <EmptyState style={{marginTop: 40}} title="No Sends Found" subtitle="No sends created yet" />
         )}
       />
     </SafeAreaView>
