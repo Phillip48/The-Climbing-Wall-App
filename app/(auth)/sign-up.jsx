@@ -164,8 +164,8 @@ const SignUp = () => {
               justifyContent: 'center',
               fontFamily: "Poppins-Medium"
             }}
-            selectedValue={form.maxBoulderingGrade}
-            onValueChange={(value) => setForm({ ...form, maxBoulderingGrade: value })}>
+            selectedValue={form.maxTopRopingGrade}
+            onValueChange={(value) => setForm({ ...form, maxTopRopingGrade: value })}>
             <Picker.Item label="5.2" value="5.2" />
             <Picker.Item label="5.3" value="5.3" />
             <Picker.Item label="5.4" value="5.4" />
