@@ -12,7 +12,13 @@ import {
 import { images } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
 import { getAllSends, getLatestSends, getUserSends } from "../../lib/appwrite";
-import { EmptyState, SearchInput, Trending, SendCard } from "../../components";
+import {
+  EmptyState,
+  SearchInput,
+  Trending,
+  SendCard,
+  InfoBox,
+} from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import {
   BarChart,
@@ -23,22 +29,37 @@ import {
 
 const Home = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
-  const { data: posts, refetch } = useAppwrite(getAllSends);
-  // const { data: latestPosts } = useAppwrite(getLatestSends);
+  // const { data: posts, refetch } = useAppwrite(getAllSends);
+  const { data: posts, refetch } = useAppwrite(() => getLatestSends(user.$id));
   const [refreshing, setRefreshing] = useState(false);
   const barData = [];
   const barDataTopRoping = [];
   const pieData = [];
   let count = 0;
   let countWarmUp = 0;
+  const { width } = useWindowDimensions();
 
   const onRefresh = async () => {
     setRefreshing(true);
     await refetch();
-    await climbingGraph();
+    // await climbingGraph();
     setRefreshing(false);
   };
-  const { width } = useWindowDimensions();
+  const totalAttempts = () => {
+    let attemptTotal = 0;
+    let funtioncount = 0;
+    posts.forEach((send) => {
+      if (funtioncount == posts.length) {
+        // console.log('total', attemptTotal)
+        return attemptTotal;
+      }
+      let functionAttempt = send.attempts;
+      attemptTotal = +attemptTotal + +functionAttempt;
+      // console.log(attemptTotal);
+      funtioncount++;
+    });
+    return attemptTotal;
+  };
 
   const climbingGraph = async () => {
     posts.forEach((post) => {
@@ -163,29 +184,29 @@ const Home = () => {
   // };
 
   useEffect(() => {
-    climbingGraph();
+    // climbingGraph();
     // warmUpChart();
-  }, [climbingGraph]);
+  }, []);
   return (
     <SafeAreaView className="bg-primary">
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
-        // renderItem={({ item }) => (
-        //   <SendCard
-        //     title={item.title}
-        //     user={user}
-        //     grade={item.grade}
-        //     attempts={item.attempts}
-        //     thumbnail={item.thumbnail}
-        //     video={item.video}
-        //     notes={item.notes}
-        //     climber={item.users.username}
-        //     avatar={item.users.avatar}
-        //     date={item.date}
-        //     itemId={item.$id}
-        //   />
-        // )}
+        renderItem={({ item }) => (
+          <SendCard
+            title={item.title}
+            user={user}
+            grade={item.grade}
+            attempts={item.attempts}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            notes={item.notes}
+            climber={item.users.username}
+            avatar={item.users.avatar}
+            date={item.date}
+            itemId={item.$id}
+          />
+        )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
@@ -214,90 +235,60 @@ const Home = () => {
             </View>
 
             <SearchInput />
-
             <View
-              style={{ minHeight: 300 }}
-              className="w-full flex-1 pt-5 pb-8"
+              // style={{ minHeight: 40 }}
+              className="w-full flex-1 pt-5 "
             >
-              <Text className="text-lg font-pregular text-gray-100 mb-3">
+              {/* <Text className="text-lg font-pregular text-gray-100 mb-3">
                 Dashboard
-              </Text>
+              </Text> */}
+              <Text className="font-pmedium text-lg text-gray-100">User Stats</Text>
               <View
-                className="w-full mb-3"
+                className="w-full "
                 style={{
                   flex: 1,
                   // justifyContent: "center",
                   // alignItems: "center",
                 }}
               >
-                <Text className="text-sm font-pregular text-gray-100 mb-3">
-                  Bouldering
-                </Text>
-                <BarChart
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  barWidth={20}
-                  width={width * 0.8}
-                  height={300}
-                  noOfSections={5}
-                  barBorderRadius={4}
-                  frontColor="white"
-                  data={barData}
-                  yAxisThickness={1}
-                  yAxisStyle={{ color: "white", textAlign: "center" }}
-                  xAxisThickness={1}
-                  xAxisLabelTextStyle={{ color: "white", textAlign: "center" }}
-                  xAxisColor={"white"}
-                  yAxisColor={"white"}
-                  yAxisTextStyle={{ color: "white" }}
-                  // isAnimated
-                />
-              </View>
-              <View
-                className="w-full mb-3"
-                style={{
-                  flex: 1,
-                  // justifyContent: "center",
-                  // alignItems: "center",
-                  marginTop: 20,
-                }}
-              >
-                <Text className="text-sm font-pregular text-gray-100 mb-3">
-                  Top Roping
-                </Text>
-                <BarChart
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  barWidth={20}
-                  width={width * 0.8}
-                  height={300}
-                  noOfSections={5}
-                  barBorderRadius={4}
-                  frontColor="white"
-                  data={barDataTopRoping}
-                  yAxisThickness={1}
-                  yAxisStyle={{ color: "white", textAlign: "center" }}
-                  xAxisThickness={1}
-                  xAxisLabelTextStyle={{ color: "white", textAlign: "center" }}
-                  xAxisColor={"white"}
-                  yAxisColor={"white"}
-                  yAxisTextStyle={{ color: "white" }}
-                  // isAnimated
-                />
-
-                {/* <PopulationPyramid 
-                  showTextBackground
-                  textBackgroundRadius={26}
-                  data={pieData}
-                /> */}
+                <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
+                  <View className=" flex flex-row">
+                    <InfoBox
+                      title={posts.length || 0}
+                      subtitle="Sends"
+                      titleStyles="text-xl"
+                      containerStyles="mr-6"
+                    />
+                    <InfoBox
+                      title={totalAttempts() || 0}
+                      subtitle="Attempts"
+                      titleStyles="text-xl"
+                      containerStyles="mr-6"
+                    />
+                    <InfoBox
+                      title={
+                        user?.maxTopRopingGrade ? user.maxTopRopingGrade : "N/A"
+                      }
+                      subtitle={"Max Top\n Roping"}
+                      titleStyles="text-xl"
+                      containerStyles="mr-6"
+                    />
+                    <InfoBox
+                      title={
+                        user?.maxBoulderingGrade
+                          ? user.maxBoulderingGrade
+                          : "N/A"
+                      }
+                      subtitle={"Max\n Bouldering "}
+                      titleStyles="text-xl"
+                    />
+                  </View>
+                </View>
               </View>
             </View>
+            <Text className="font-pmedium text-lg text-gray-100">
+              Latest Sends
+            </Text>
           </View>
         )}
         ListEmptyComponent={() => (

@@ -1,17 +1,46 @@
 import { router } from "expo-router";
+import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Image, Text, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  useWindowDimensions,
+  RefreshControl,
+} from "react-native";
 
 import { icons } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
-import { getUserSends, signOut, getUserProjects } from "../../lib/appwrite";
+import { getUserSends, signOut, getUserProjects, editProfile } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { EmptyState, InfoBox, SendCard } from "../../components";
+import {
+  BarChart,
+  LineChart,
+  PieChart,
+  PopulationPyramid,
+} from "react-native-gifted-charts";
 
 const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
-  const { data: posts } = useAppwrite(() => getUserSends(user.$id));
-  // const { data: projectPosts } = useAppwrite(() => getUserProjects(user.$id));
+  const [refreshing, setRefreshing] = useState(false);
+  const { data: posts, refetch } = useAppwrite(() => getUserSends(user.$id));
+  const [form, setForm] = useState({
+    username: user.username,
+    maxBoulderingGrade: user.maxBoulderingGrade,
+    maxTopRopingGrade: user.maxTopRopingGrade,
+    avatar: user.avatar,
+    userId: user.$id
+    // bio: bio,
+  });
+
+  const barData = [];
+  const barDataTopRoping = [];
+  const pieData = [];
+  let count = 0;
+  const { width } = useWindowDimensions();
 
   const totalAttempts = () => {
     let attemptTotal = 0;
@@ -29,6 +58,13 @@ const Profile = () => {
     return attemptTotal;
   };
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    await climbingGraph();
+    setRefreshing(false);
+  };
+
   const logout = async () => {
     await signOut();
     setUser(null);
@@ -36,6 +72,93 @@ const Profile = () => {
     router.replace("/sign-in");
   };
 
+  const editUserProfile = async () => {
+    await editProfile(form);
+    return
+  };
+
+  const climbingGraph = async () => {
+    posts.forEach((post) => {
+      // if done
+      if (posts.length - 1 == count) {
+        if (barData.length == 0) {
+          // const barData = [
+          //   { value: 1, label: "V2" },
+          //   { value: 4, label: "V5", frontColor: "#177AD5" },
+          //   { value: 1, label: "V3", frontColor: "#177AD5" },
+          //   { value: 6, label: "V6" },
+          //   { value: 1, label: "V2", frontColor: "#177AD5" },
+          //   { value: 6, label: "V7" },
+          //   { value: 8, label: "V8" },
+          // ];
+          console.log("No sends to display", barData, pieData);
+          count = 0;
+          return barData, pieData;
+        }
+        count = 0;
+        barData.sort((a, b) => {
+          let newAGrade = Number(a.label.substring(1));
+          let newBGrade = Number(b.label.substring(1));
+          // console.log(newAGrade, newBGrade);
+          return newAGrade - newBGrade;
+        });
+        barDataTopRoping.sort((a, b) => {
+          let newAGrade = Number(a.label.substring(1));
+          let newBGrade = Number(b.label.substring(1));
+          // console.log(newAGrade, newBGrade);
+          return newAGrade - newBGrade;
+        });
+        return barData, barDataTopRoping;
+      }
+      if (post.grade.startsWith("V")) {
+        // for bar chart 1 graph bouldering
+        let dataObj = {
+          value: post.attempts,
+          label: post.grade,
+          topLabelComponent: () => (
+            <Text
+              style={{
+                color: "white",
+                fontSize: 12,
+                marginBottom: 4,
+                fontWeight: 700,
+              }}
+            >
+              {post.attempts}
+            </Text>
+          ),
+        };
+        barData.push(dataObj);
+        count++;
+      } else {
+        // for bar chart top roping 2 graph
+        let dataObj = {
+          value: post.attempts,
+          label: post.grade,
+          topLabelComponent: () => (
+            <Text
+              style={{
+                color: "white",
+                fontSize: 12,
+                marginBottom: 4,
+                fontWeight: 700,
+              }}
+            >
+              {post.attempts}
+            </Text>
+          ),
+        };
+        barDataTopRoping.push(dataObj);
+        count++;
+        // return barData, pieData;
+      }
+    });
+  };
+
+  useEffect(() => {
+    climbingGraph();
+    // warmUpChart();
+  }, [climbingGraph]);
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
@@ -63,19 +186,33 @@ const Profile = () => {
         //     subtitle="No sends found for this profile"
         //   />
         // )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         ListHeaderComponent={() => (
           <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
-            <TouchableOpacity
-              onPress={logout}
-              className="flex w-full items-end mb-10"
-            >
-              <Image
-                source={icons.logout}
-                resizeMode="contain"
-                className="w-6 h-6"
-              />
-            </TouchableOpacity>
-
+            <View style={{flex:1,flexDirection: 'row', marginBottom: 10, justifyContent: "space-between" }} className="w-full justify-center items-center">
+              <TouchableOpacity
+                onPress={editUserProfile}
+                // className="flex w-full items-start mb-10"
+              >
+                <Image
+                  source={icons.settings}
+                  resizeMode="contain"
+                  className="w-6 h-6"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={logout}
+                // className="flex w-full items-end mb-10"
+              >
+                <Image
+                  source={icons.logout}
+                  resizeMode="contain"
+                  className="w-6 h-6"
+                />
+              </TouchableOpacity>
+            </View>
             <View className="w-16 h-16 border border-secondary rounded-lg flex justify-center items-center">
               <Image
                 source={{ uri: user?.avatar }}
@@ -121,7 +258,99 @@ const Profile = () => {
               <Text className="font-pmedium text-sm text-gray-100">Bio:</Text>
               <Text className="text-lg text-white font-psemibold">{user?.bio ? user.bio : ""}</Text>
             </View> */}
+            <View
+              style={{ minHeight: 300 }}
+              className="w-full flex-1 pt-5 pb-8"
+            >
+              <Text className="text-lg font-pregular text-gray-100 mb-3">
+                Stats
+              </Text>
+              <View
+                className="w-full mb-3"
+                style={{
+                  flex: 1,
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                }}
+              >
+                <Text className="text-sm font-pregular text-gray-100 mb-3">
+                  Bouldering
+                </Text>
+                <BarChart
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  barWidth={20}
+                  width={width * 0.8}
+                  height={300}
+                  noOfSections={5}
+                  barBorderRadius={4}
+                  frontColor="white"
+                  data={barData}
+                  yAxisThickness={1}
+                  yAxisStyle={{ color: "white", textAlign: "center" }}
+                  xAxisThickness={1}
+                  xAxisLabelTextStyle={{ color: "white", textAlign: "center" }}
+                  xAxisColor={"white"}
+                  yAxisColor={"white"}
+                  yAxisTextStyle={{ color: "white" }}
+                  // isAnimated
+                />
+                <Text className="font-pmedium text-sm text-gray-100">
+                  x axis is the grade - y axis is the attempts
+                </Text>
+              </View>
+              <View
+                className="w-full mb-3"
+                style={{
+                  flex: 1,
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                  marginTop: 20,
+                }}
+              >
+                <Text className="text-sm font-pregular text-gray-100 mb-3">
+                  Top Roping
+                </Text>
+                <BarChart
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  barWidth={20}
+                  width={width * 0.8}
+                  height={300}
+                  noOfSections={5}
+                  barBorderRadius={4}
+                  frontColor="white"
+                  data={barDataTopRoping}
+                  yAxisThickness={1}
+                  yAxisStyle={{ color: "white", textAlign: "center" }}
+                  xAxisThickness={1}
+                  xAxisLabelTextStyle={{ color: "white", textAlign: "center" }}
+                  xAxisColor={"white"}
+                  yAxisColor={"white"}
+                  yAxisTextStyle={{ color: "white" }}
+                  // isAnimated
+                />
+                <Text className="font-pmedium text-sm text-gray-100">
+                  x axis is the grade - y axis is the attempts
+                </Text>
+
+                {/* <PopulationPyramid 
+                  showTextBackground
+                  textBackgroundRadius={26}
+                  data={pieData}
+                /> */}
+              </View>
+            </View>
           </View>
+        )}
+        ListEmptyComponent={() => (
+          <EmptyState title="No Sends Found" subtitle="No sends created yet" />
         )}
       />
     </SafeAreaView>
