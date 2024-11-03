@@ -42,6 +42,9 @@ const SendCard = ({
   const [sendUpdate, setSendUpdate] = useState("");
   // Convert to string to display in edit modal
   let newAttempts = attempts.toString();
+  let formDate = date; //2024-10-30T17:57:00.000+00:00
+  let newDate = new Date(formDate);
+  let formattedDate = newDate.toISOString().slice(0, 16); //2024-10-30T17:57
   const [form, setForm] = useState({
     warmup: warmup,
     title: title,
@@ -198,7 +201,7 @@ const SendCard = ({
               className="text-sm text-gray-100 font-pregular"
               numberOfLines={1}
             >
-              Date: {date ? date : "No Date Recorded"}
+              Date: {date ? formattedDate : "No Date Recorded"}
             </Text>
             <Text
               className="text-sm text-gray-100 font-pregular"

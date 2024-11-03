@@ -117,16 +117,10 @@ const Profile = () => {
                 titleStyles="text-xl"
               />
             </View>
-            <View style={{justifyContent: 'center', alignItems: 'start', marginTop: 20}} className="w-full mt-5 flex">
+            {/* <View style={{justifyContent: 'center', alignItems: 'start', marginTop: 20}} className="w-full mt-5 flex">
               <Text className="font-pmedium text-sm text-gray-100">Bio:</Text>
               <Text className="text-lg text-white font-psemibold">{user?.bio ? user.bio : ""}</Text>
-
-              {/* <InfoBox
-                title={user?.bio ? user.bio : ""}
-                // subtitle={"Bio"}
-                titleStyles="text-xl"
-              /> */}
-            </View>
+            </View> */}
           </View>
         )}
       />
