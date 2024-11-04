@@ -35,11 +35,11 @@ const Profile = () => {
   const [refreshing, setRefreshing] = useState(false);
   const { data: posts, refetch } = useAppwrite(() => getUserSends(user.$id));
   const [form, setForm] = useState({
-    username: user.username,
-    maxBoulderingGrade: user.maxBoulderingGrade,
-    maxTopRopingGrade: user.maxTopRopingGrade,
-    avatar: user.avatar,
-    userId: user.$id,
+    username: user?.username,
+    maxBoulderingGrade: user?.maxBoulderingGrade,
+    maxTopRopingGrade: user?.maxTopRopingGrade,
+    avatar: user?.avatar,
+    userId: user?.$id,
     // bio: bio,
   });
 
@@ -181,7 +181,7 @@ const Profile = () => {
       let formattedDate = newDate.toISOString().split("T")[0]; //2024-10-30
       let dataObj = {
         date: formattedDate,
-        count: Number(send.attempts)
+        count: Number(send.attempts),
       };
       // console.log(dataObj);
       sendDates.push(dataObj);
@@ -285,14 +285,16 @@ const Profile = () => {
                 containerStyles="mr-6"
               />
               <InfoBox
-                title={user?.maxTopRopingGrade ? user.maxTopRopingGrade : "N/A"}
+                title={
+                  user?.maxTopRopingGrade ? user?.maxTopRopingGrade : "N/A"
+                }
                 subtitle={"Max Top\n Roping"}
                 titleStyles="text-xl"
                 containerStyles="mr-6"
               />
               <InfoBox
                 title={
-                  user?.maxBoulderingGrade ? user.maxBoulderingGrade : "N/A"
+                  user?.maxBoulderingGrade ? user?.maxBoulderingGrade : "N/A"
                 }
                 subtitle={"Max\n Bouldering "}
                 titleStyles="text-xl"
@@ -321,24 +323,26 @@ const Profile = () => {
                 <Text className="text-sm font-pregular text-gray-100 mb-3">
                   Calendar Heatmap
                 </Text>
-                <ContributionGraph
-                  values={sendDates}
-                  // startDate={new Date("2024-08-01")}
-                  endDate={new Date("2025-01-01")}
-                  numDays={153}
-                  width={'100%'}
-                  height={220}
-                  chartConfig={{
-                    backgroundGradientFrom: "#161622",
-                    backgroundGradientFromOpacity: 0,
-                    backgroundGradientTo: "#161622",
-                    backgroundGradientToOpacity: 0,
-                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    strokeWidth: 3, // optional, default 3
-                    barPercentage: 0.5,
-                    useShadowColorFromDataset: false, // optional
-                  }}
-                />
+                <View style={{flex:1, justifyContent: 'center'}}>
+                  <ContributionGraph
+                    values={sendDates}
+                    // startDate={new Date("2024-08-01")}
+                    endDate={new Date("2025-01-01")}
+                    numDays={100}
+                    width={width}
+                    height={220}
+                    chartConfig={{
+                      backgroundGradientFrom: "#161622",
+                      backgroundGradientFromOpacity: 0,
+                      backgroundGradientTo: "#161622",
+                      backgroundGradientToOpacity: 0,
+                      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                      strokeWidth: 3, // optional, default 3
+                      barPercentage: 0.5,
+                      useShadowColorFromDataset: false, // optional
+                    }}
+                  />
+                </View>
                 <Text className="text-sm font-pregular text-gray-100 mb-3">
                   Bouldering
                 </Text>

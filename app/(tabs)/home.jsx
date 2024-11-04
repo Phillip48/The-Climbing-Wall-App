@@ -29,8 +29,8 @@ import {
 
 const Home = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
-  const { data: userPosts } = useAppwrite(() => getUserSends(user.$id));
-  const { data: posts, refetch } = useAppwrite(() => getLatestSends(user.$id));
+  const { data: userPosts } = useAppwrite(() => getUserSends(user?.$id)); // added ? user?.$id
+  const { data: posts, refetch } = useAppwrite(() => getLatestSends(user?.$id)); // added ? user?.$id
   const [refreshing, setRefreshing] = useState(false);
   const barData = [];
   const barDataTopRoping = [];
@@ -189,7 +189,7 @@ const Home = () => {
     // warmUpChart();
   }, []);
   return (
-    <SafeAreaView className="bg-primary">
+    <SafeAreaView className="bg-primary" style={{backgroundColor: "#161622", paddingBottom:20}}>
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
@@ -293,7 +293,7 @@ const Home = () => {
           </View>
         )}
         ListEmptyComponent={() => (
-          <EmptyState style={{marginTop: 40}} title="No Sends Found" subtitle="No sends created yet" />
+          <EmptyState style={{minHeight: '100%', marginBottom:30}} title="No Sends Found" subtitle="No sends created yet" />
         )}
       />
     </SafeAreaView>

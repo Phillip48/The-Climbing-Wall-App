@@ -203,13 +203,13 @@ const SignUp = () => {
             handleChangeText={(e) => setForm({ ...form, maxTopRopingGrade: e })}
             otherStyles="mt-7"
           /> */}
-
+{/* 
           <FormField
             title="Bio"
             value={form.bio}
             handleChangeText={(e) => setForm({ ...form, bio: e })}
             otherStyles="mt-7"
-          />
+          /> */}
 
           <CustomButton
             title="Sign Up"

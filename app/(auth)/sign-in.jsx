@@ -80,9 +80,14 @@ const SignIn = () => {
           />
 
           <View className="flex justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">
-              Don't have an account?
-            </Text>
+            <Link
+              href="/reset-pass"
+              className="text-lg font-psemibold text-secondary"
+            >
+              Reset Password
+            </Link>
+          </View>
+          <View className="flex justify-center pt-5 flex-row gap-2">
             <Link
               href="/sign-up"
               className="text-lg font-psemibold text-secondary"

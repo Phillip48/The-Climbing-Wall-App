@@ -38,9 +38,7 @@ const Projects = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const { data: posts, refetch } = useAppwrite(() =>
-    getUsersProjects(user.$id)
-  );
+  const { data: posts, refetch } = useAppwrite(() => getUsersProjects(user.$id));
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
