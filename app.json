@@ -16,16 +16,32 @@
     "ios": {
       "supportsTablet": true
     },
+    "infoPlist": {
+      "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets.",
+      "NSPhotoLibraryUsageDescription": "We need access to your photo library to allow video selection.",
+      "NSPhotoLibraryAddUsageDescription": "We need access to your photo library to allow video selection."
+    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "permissions": [
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION"
+      ],
       "package": "com.tcw.the-climbing-wall"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "expo-font"]
+    "plugins": ["expo-router", "expo-font"],
+    "extra": {
+      "eas": {
+        "projectId": "9781fb4a-84c0-4ba0-90f2-74ac5a756b67"
+      }
+    }
   }
 }

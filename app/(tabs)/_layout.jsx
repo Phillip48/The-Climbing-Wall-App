@@ -77,9 +77,9 @@ const TabLayout = () => {
         />
 
         <Tabs.Screen
-          name="create"
+          name="sends"
           options={{
-            title: "create",
+            title: "sends",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
