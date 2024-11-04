@@ -348,6 +348,10 @@ const Create = () => {
                   <Picker.Item label="5.14b" value="5.14b" />
                   <Picker.Item label="5.14c" value="5.14c" />
                   <Picker.Item label="5.14d" value="5.14d" />
+                  <Picker.Item label="5.15a" value="5.15a" />
+                  <Picker.Item label="5.15b" value="5.15b" />
+                  <Picker.Item label="5.15c" value="5.15c" />
+                  <Picker.Item label="5.15d" value="5.15d" />
                 </Picker>
                 <Text
                   className="font-psemibold"

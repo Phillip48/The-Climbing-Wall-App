@@ -20,12 +20,17 @@ const SignUp = () => {
     maxBoulderingGrade: "",
     maxTopRopingGrade: "",
     bio: "",
+    // pin: "",
   });
 
   const submit = async () => {
-    if (form.username === "" || form.email === "" || form.password === "") {
+    if (form.username === "" || form.email === "" || form.password === "" || form.pin === '') {
       Alert.alert("Error", "Please fill in all fields");
     }
+
+    // if(!isNumber(form.pin)){
+    //   Alert.alert("Error", "Pin must be 4-6 digits long and numbers only");
+    // }
 
     setSubmitting(true);
     try {
@@ -35,7 +40,8 @@ const SignUp = () => {
         form.username,
         form.bio,
         form.maxBoulderingGrade,
-        form.maxTopRopingGrade
+        form.maxTopRopingGrade,
+        // form.pin
       );
       setUser(result);
       setIsLogged(true);
@@ -68,14 +74,14 @@ const SignUp = () => {
           </Text>
 
           <FormField
-            title="Username"
+            title="Username*"
             value={form.username}
             handleChangeText={(e) => setForm({ ...form, username: e })}
             otherStyles="mt-10"
           />
 
           <FormField
-            title="Email"
+            title="Email*"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
@@ -83,7 +89,7 @@ const SignUp = () => {
           />
 
           <FormField
-            title="Password"
+            title="Password*"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
@@ -210,6 +216,13 @@ const SignUp = () => {
             handleChangeText={(e) => setForm({ ...form, bio: e })}
             otherStyles="mt-7"
           /> */}
+          {/* <FormField
+            title='Pin*'
+            value={form.pin}
+            handleChangeText={(e) => setForm({ ...form, pin: e })}
+            otherStyles="mt-7"
+          />
+          <Text style={{color: '#7B7B8B'}} className=" font-psemibold">This is something only you should know and can be used to verify your account for future logins. Pin must be 4-6 digits</Text> */}
 
           <CustomButton
             title="Sign Up"

@@ -7,6 +7,7 @@ import {
   RefreshControl,
   Text,
   View,
+  Dimensions
 } from "react-native";
 
 import { images } from "../../constants";
@@ -189,7 +190,7 @@ const Home = () => {
     // warmUpChart();
   }, []);
   return (
-    <SafeAreaView className="bg-primary" style={{backgroundColor: "#161622", paddingBottom:20}}>
+    <SafeAreaView className="bg-primary" style={{backgroundColor: "#161622", paddingBottom:20, minHeight: Dimensions.get("window").height - 100}}>
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
@@ -243,7 +244,7 @@ const Home = () => {
               {/* <Text className="text-lg font-pregular text-gray-100 mb-3">
                 Dashboard
               </Text> */}
-              <Text className="font-pmedium text-lg text-gray-100">User Stats</Text>
+              {/* <Text className="font-pmedium text-lg text-gray-100">User Stats</Text> */}
               <View
                 className="w-full "
                 style={{
@@ -252,7 +253,7 @@ const Home = () => {
                   // alignItems: "center",
                 }}
               >
-                <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
+                {/* <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
                   <View className=" flex flex-row">
                     <InfoBox
                       title={userPosts.length || 0}
@@ -284,7 +285,7 @@ const Home = () => {
                       titleStyles="text-xl"
                     />
                   </View>
-                </View>
+                </View> */}
               </View>
             </View>
             <Text className="font-pmedium text-lg text-gray-100">
@@ -293,7 +294,7 @@ const Home = () => {
           </View>
         )}
         ListEmptyComponent={() => (
-          <EmptyState style={{minHeight: '100%', marginBottom:30}} title="No Sends Found" subtitle="No sends created yet" />
+          <EmptyState style={{minHeight: Dimensions.get("window").height - 100, marginBottom:30}} title="No Sends Found" subtitle="No sends created yet" />
         )}
       />
     </SafeAreaView>

@@ -104,7 +104,7 @@ const SendCard = ({
     showMode("time");
   };
 
-  const updateSend = async (str, itemId) => {
+  const updateSend = async (str, itemId, grade) => {
     setSendUpdate(str);
     setModalVisible(!modalVisible);
     if (str == "edit") {
@@ -112,7 +112,7 @@ const SendCard = ({
       return;
     } else if (str == "delete") {
       try {
-        await deleteSendPost(itemId, user.$id);
+        await deleteSendPost(itemId, grade, user.$id);
         Alert.alert("Success", "Post deleted successfully");
         router.push("/home");
       } catch (error) {
@@ -126,9 +126,12 @@ const SendCard = ({
 
   // Submit function for editting the send
   const submit = async () => {
-    if (form.attempts === "" || form.grade === "") {
+    if (form.attempts == "" || form.grade == "") {
       Alert.alert("Error", "Please fill in all fields");
     }
+    // if(isNumber(!form.attempts)){
+    //   Alert.alert("Error", "Attempts must be number only");
+    // }
     setModalEditVisible(!modalEditVisible);
     setUploading(true);
     try {
@@ -286,7 +289,7 @@ const SendCard = ({
                 fontFamily: "Poppins-SemiBold",
               }}
               selectedValue={sendUpdate}
-              onValueChange={(value) => updateSend(value, itemId)}
+              onValueChange={(value) => updateSend(value, itemId, grade)}
             >
               <Picker.Item label="Edit" value="edit" />
               <Picker.Item label="Delete" value="delete" />
@@ -461,6 +464,10 @@ const SendCard = ({
                   <Picker.Item label="5.14b" value="5.14b" />
                   <Picker.Item label="5.14c" value="5.14c" />
                   <Picker.Item label="5.14d" value="5.14d" />
+                  <Picker.Item label="5.15a" value="5.15a" />
+                  <Picker.Item label="5.15b" value="5.15b" />
+                  <Picker.Item label="5.15c" value="5.15c" />
+                  <Picker.Item label="5.15d" value="5.15d" />
                 </Picker>
                 <Text
                   className="font-psemibold"

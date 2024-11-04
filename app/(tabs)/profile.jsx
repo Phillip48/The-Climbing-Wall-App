@@ -36,10 +36,10 @@ const Profile = () => {
   const { data: posts, refetch } = useAppwrite(() => getUserSends(user.$id));
   const [form, setForm] = useState({
     username: user?.username,
-    maxBoulderingGrade: user?.maxBoulderingGrade,
-    maxTopRopingGrade: user?.maxTopRopingGrade,
-    avatar: user?.avatar,
-    userId: user?.$id,
+    maxBoulderingGrade: user.maxBoulderingGrade, // removed ?
+    maxTopRopingGrade: user.maxTopRopingGrade, // removed ?
+    avatar: user.avatar,
+    userId: user.$id,
     // bio: bio,
   });
 
@@ -286,7 +286,7 @@ const Profile = () => {
               />
               <InfoBox
                 title={
-                  user?.maxTopRopingGrade ? user?.maxTopRopingGrade : "N/A"
+                  user.maxTopRopingGrade ? user.maxTopRopingGrade : "N/A" // removed ?
                 }
                 subtitle={"Max Top\n Roping"}
                 titleStyles="text-xl"
@@ -294,7 +294,7 @@ const Profile = () => {
               />
               <InfoBox
                 title={
-                  user?.maxBoulderingGrade ? user?.maxBoulderingGrade : "N/A"
+                  user.maxBoulderingGrade ? user.maxBoulderingGrade : "N/A" // removed ?
                 }
                 subtitle={"Max\n Bouldering "}
                 titleStyles="text-xl"
