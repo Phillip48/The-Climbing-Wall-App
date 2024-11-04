@@ -35,6 +35,7 @@ Create a mobile app with the following features:
   * Video 
   * Thumbnail
   * If the project was sent
+- [x] Once a project is sent it will be deleted and created as a send. 
 - [x] Create, edit, and delete a send. The send has the following fields:
   * Title
   * Grade
@@ -43,50 +44,21 @@ Create a mobile app with the following features:
   * Video 
   * Thumbnail
   * Was the climb a warmup
+- [x] Once a send is deleted or updated it will check your sends to update your max grades. 
 - [x] Have a page that shows the users projects and sends.
-- [x] Have a page that shows the users stats
-- [x] Connected with appwrite to hold and relay all data
-
-
-<!-- - [x] Use a Node and Express web server
-- [x] Backed by a MySQL database with a Sequelize ORM
-- [x] Use an existing public dataset to power the database (OMDB)
-- [x] Migration strategy using seeds and schema files
-- [x] Routes for retrieving and adding new data
-- [x] Incorporate authentication (BCrypt)
-- [x] Folder structure that meets the MVC paradigm
-- [x] Use Handlebars for server-side templating
-- [x] Protected API keys in Node with environment variables
-- [x] Polished front end/UI
+- [x] Have a page that shows the users stats like climbing totals, max grades, graphs and heat maps. 
+- [x] Connected with appwrite to hold and relay all data.
 - [x] Meet good-quality coding standards (indentation, scoping, naming, etc.)
-- [x] Deployed using Heroku (with data) -->
 
-<!-- ## Installation
+## Installation
 
-You can access the deployed application with the Heroku link: (Not uplodaded yet)
-
-To install the project follow these steps:
-
-1. Clone the application from GitHub with:
-
-   - git clone [clone link from GitHub]
-
-2. From the root folder, install the dependencies with:
-
-   - npm install
-
-3. Run the app with:
-   - npx expo start -->
+It will soon be avaiable in the Google play store and the App Store for IOS.
 
 ## Usage
 
 **User Story**
 
-As the user I want to track my climbing progress with a mobile app. This should allow me to create, read, upload and delete projects and sends.
-
-**Screenshots of Application:**  
-
-<!-- ![image]()   -->
+As the user I want to track my climbing progress with a mobile app. This should allow me to create, read, upload and delete projects and sends. I also want to see my stats like total send and attempts, as well as max bouldering and top roping grades. Other stats include a graph of all sends and a heatmap to show days climbed.
 
 ## Questions  
 
