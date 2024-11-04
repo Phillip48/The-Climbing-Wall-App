@@ -24,6 +24,24 @@ const AuthLayout = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="reset-pass"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="reset-pass-auth"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="new-pass"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
 
       <Loader isLoading={loading} />

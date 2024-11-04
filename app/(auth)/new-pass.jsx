@@ -7,17 +7,21 @@ import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
 import { getCurrentUser, signIn, resetPassword } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
-
-const resetPass = () => {
+const newPass = () => {
   const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
-    email: "",
+    newPassword: "",
+    confirmPassword: "",
   });
 
   const submit = async () => {
-    if (form.email === "") {
+    if (form.newPassword === "" || form.confirmPassword === "") {
       Alert.alert("Error", "Please fill in all fields");
+    }
+
+    if (newPassword != confirmPassword) {
+      Alert.alert("Error", "Passwords do not match please try again");
     }
 
     setSubmitting(true);
@@ -28,8 +32,8 @@ const resetPass = () => {
       //   setUser(result);
       //   setIsLogged(true);
 
-      Alert.alert("Email Sent", "A 4 digit code was sent to your email. Please confirm the code to reset your password!");
-      // router.replace("/reset-pass-auth");
+      Alert.alert("Success", "Password reset");
+      router.replace("/sign-in");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
@@ -55,23 +59,22 @@ const resetPass = () => {
             Reset Password
           </Text>
           <Text className="text-lg font-pregular text-gray-100 mb-3">
-            We'll send you a one time code to your email to reset your password.
+            Choose a new password.
           </Text>
 
           <FormField
-            title="Email"
-            value={form.email}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
+            title="New password"
+            value={form.newPassword}
+            handleChangeText={(e) => setForm({ ...form, newPassword: e })}
             otherStyles="mt-7"
-            keyboardType="email-address"
           />
 
-          {/* <FormField
-            title="Password"
-            value={form.password}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
+          <FormField
+            title="Confirm new password"
+            value={form.confirmPassword}
+            handleChangeText={(e) => setForm({ ...form, confirmPassword: e })}
             otherStyles="mt-7"
-          /> */}
+          />
 
           <CustomButton
             title="Send Code"
@@ -81,22 +84,28 @@ const resetPass = () => {
           />
 
           <View className="flex justify-center pt-5 flex-row gap-2">
+            <Text className="text-lg text-gray-100 font-pregular">
+              Forgot your password?
+            </Text>
             <Link
-              href="/sign-in"
+              href="/reset-pass"
               className="text-lg font-psemibold text-secondary"
             >
-              Sign In
+              Reset Password
             </Link>
           </View>
           <View
             style={{ marginTop: 2 }}
             className="flex justify-center flex-row gap-2"
           >
+            <Text className="text-lg text-gray-100 font-pregular">
+              Don't have an account?
+            </Text>
             <Link
               href="/sign-up"
               className="text-lg font-psemibold text-secondary"
             >
-              Sign up
+              Signup
             </Link>
           </View>
         </View>
@@ -105,4 +114,4 @@ const resetPass = () => {
   );
 };
 
-export default resetPass;
+export default newPass;

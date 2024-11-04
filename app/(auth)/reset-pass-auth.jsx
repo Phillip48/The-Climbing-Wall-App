@@ -8,28 +8,26 @@ import { CustomButton, FormField } from "../../components";
 import { getCurrentUser, signIn, resetPassword } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
-const resetPass = () => {
+const resetPassAuth = () => {
   const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
-    email: "",
+    code: "",
   });
 
   const submit = async () => {
-    if (form.email === "") {
-      Alert.alert("Error", "Please fill in all fields");
+    if (form.code === "") {
+      Alert.alert("Error", "Please enter the code");
     }
-
     setSubmitting(true);
-
     try {
       await resetPassword(form);
       //   const result = await getCurrentUser();
       //   setUser(result);
       //   setIsLogged(true);
 
-      Alert.alert("Email Sent", "A 4 digit code was sent to your email. Please confirm the code to reset your password!");
-      // router.replace("/reset-pass-auth");
+      Alert.alert("Success", "Set a new password");
+      router.replace("/new-pass");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
@@ -52,26 +50,19 @@ const resetPass = () => {
           />
 
           <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Reset Password
+            Enter 4 Digit Code
           </Text>
           <Text className="text-lg font-pregular text-gray-100 mb-3">
-            We'll send you a one time code to your email to reset your password.
+            A 4 digit code was sent to your email. To reset your password please enter the code here.
           </Text>
 
           <FormField
-            title="Email"
-            value={form.email}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
+            title="Number"
+            value={form.code}
+            handleChangeText={(e) => setForm({ ...form, code: e })}
             otherStyles="mt-7"
-            keyboardType="email-address"
+            // keyboardType="email-address"
           />
-
-          {/* <FormField
-            title="Password"
-            value={form.password}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
-            otherStyles="mt-7"
-          /> */}
 
           <CustomButton
             title="Send Code"
@@ -82,10 +73,10 @@ const resetPass = () => {
 
           <View className="flex justify-center pt-5 flex-row gap-2">
             <Link
-              href="/sign-in"
+              href="/reset-pass"
               className="text-lg font-psemibold text-secondary"
             >
-              Sign In
+              Reset Password
             </Link>
           </View>
           <View
@@ -96,7 +87,7 @@ const resetPass = () => {
               href="/sign-up"
               className="text-lg font-psemibold text-secondary"
             >
-              Sign up
+              Signup
             </Link>
           </View>
         </View>
@@ -105,4 +96,4 @@ const resetPass = () => {
   );
 };
 
-export default resetPass;
+export default resetPassAuth;
