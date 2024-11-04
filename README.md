@@ -49,6 +49,7 @@ Create a mobile app with the following features:
 - [x] Have a page that shows the users stats like climbing totals, max grades, graphs and heat maps. 
 - [x] Connected with appwrite to hold and relay all data.
 - [x] Meet good-quality coding standards (indentation, scoping, naming, etc.)
+- [x] Keep security in mind when dealing with user data.
 
 ## Installation
 
