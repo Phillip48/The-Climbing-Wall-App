@@ -1,15 +1,15 @@
 import { useState, React } from "react";
-import { Link, router } from "expo-router";
+import { Link, router, useLocalSearchParams  } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 
 import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
-import { getCurrentUser, signIn, resetPassword } from "../../lib/appwrite";
-import { useGlobalContext } from "../../context/GlobalProvider";
+import { getCurrentUser, signIn, resetPassword, findUserEmail } from "../../lib/appwrite";
+import { sendEmail } from "../../lib/sendEmail"
+// import { useGlobalContext } from "../../context/GlobalProvider";
 
 const resetPass = () => {
-  const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -19,17 +19,11 @@ const resetPass = () => {
     if (form.email === "") {
       Alert.alert("Error", "Please fill in all fields");
     }
-
     setSubmitting(true);
-
     try {
-      await resetPassword(form);
-      //   const result = await getCurrentUser();
-      //   setUser(result);
-      //   setIsLogged(true);
-
-      Alert.alert("Email Sent", "A 4 digit code was sent to your email. Please confirm the code to reset your password!");
-      // router.replace("/reset-pass-auth");
+      const result = await sendEmail(form.email);
+      Alert.alert("Email Sent", "A 6 digit code was sent to your email. Please confirm the code to reset your password!");
+      router.push({ pathname: "/reset-pass-auth", params: {email: result.email, code: result.code}});
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {

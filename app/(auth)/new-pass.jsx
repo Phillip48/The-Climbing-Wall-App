@@ -1,16 +1,18 @@
 import { useState, React } from "react";
-import { Link, router } from "expo-router";
+import { Link, router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 
 import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
-import { getCurrentUser, signIn, resetPassword } from "../../lib/appwrite";
+import { getCurrentUser, signIn, resetPassword, findUserEmail } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 const newPass = () => {
   const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
+  const {email} = useLocalSearchParams();
   const [form, setForm] = useState({
+    email: email,
     newPassword: "",
     confirmPassword: "",
   });
@@ -20,18 +22,13 @@ const newPass = () => {
       Alert.alert("Error", "Please fill in all fields");
     }
 
-    if (newPassword != confirmPassword) {
+    if (form.newPassword != form.confirmPassword) {
       Alert.alert("Error", "Passwords do not match please try again");
     }
-
     setSubmitting(true);
 
     try {
-      await resetPassword(form);
-      //   const result = await getCurrentUser();
-      //   setUser(result);
-      //   setIsLogged(true);
-
+      await findUserEmail(form);
       Alert.alert("Success", "Password reset");
       router.replace("/sign-in");
     } catch (error) {
@@ -63,37 +60,25 @@ const newPass = () => {
           </Text>
 
           <FormField
-            title="New password"
+            title="Password"
             value={form.newPassword}
             handleChangeText={(e) => setForm({ ...form, newPassword: e })}
             otherStyles="mt-7"
           />
 
           <FormField
-            title="Confirm new password"
+            title="Confirm Password"
             value={form.confirmPassword}
             handleChangeText={(e) => setForm({ ...form, confirmPassword: e })}
             otherStyles="mt-7"
           />
 
           <CustomButton
-            title="Send Code"
+            title="Submit password"
             handlePress={submit}
             containerStyles="mt-7"
             isLoading={isSubmitting}
           />
-
-          <View className="flex justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">
-              Forgot your password?
-            </Text>
-            <Link
-              href="/reset-pass"
-              className="text-lg font-psemibold text-secondary"
-            >
-              Reset Password
-            </Link>
-          </View>
           <View
             style={{ marginTop: 2 }}
             className="flex justify-center flex-row gap-2"

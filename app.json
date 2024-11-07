@@ -14,12 +14,13 @@
     "scheme": "tcw",
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
-    },
-    "infoPlist": {
-      "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets.",
-      "NSPhotoLibraryUsageDescription": "We need access to your photo library to allow video selection.",
-      "NSPhotoLibraryAddUsageDescription": "We need access to your photo library to allow video selection."
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets.",
+        "NSPhotoLibraryUsageDescription": "We need access to your photo library to allow video selection.",
+        "NSPhotoLibraryAddUsageDescription": "We need access to your photo library to allow video selection."
+      },
+      "package": "com.tcw.the-climbing-wall"
     },
     "android": {
       "adaptiveIcon": {

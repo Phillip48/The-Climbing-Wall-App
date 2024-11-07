@@ -28,7 +28,7 @@ const FormField = ({
           {...props}
         />
 
-        {title === "Password" && (
+        {title === "Password"|| title ==="Confirm Password" && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             <Image
               source={!showPassword ? icons.eye : icons.eyeHide}
